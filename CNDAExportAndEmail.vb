@@ -11,11 +11,11 @@ Public Class CNDAExportAndEmail
     End Sub
 
     Private Sub CNDAUpdateEmail_Button_Click(sender As Object, e As RibbonControlEventArgs) Handles CNDAUpdateEmail_Button.Click
-        Dim m As Outlook.Inspector = e.Control.Context
-        Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
-        If mailItem IsNot Nothing Then
-            Dim df As New GetFileDialog
-            If df.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
+        Dim df As New GetFileDialog
+        If df.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
+            Dim m As Outlook.Inspector = e.Control.Context
+            Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
+            If mailItem IsNot Nothing Then
                 Dim pptFilename As String = df.GetPptFilename()
                 Dim xlsFilename As String = df.GetXlsFilename()
                 ExportAndEmailAll(pptFilename, xlsFilename, mailItem)

@@ -1,8 +1,8 @@
 ﻿Imports System.Windows.Forms
 
 Public Class GetFileDialog
-    Dim pptFilename As String
-    Dim xlsFilename As String
+    Dim pptFilename As String = ""
+    Dim xlsFilename As String = ""
 
     Public Function GetPptFilename() As String
         GetPptFilename = pptFilename
@@ -13,8 +13,22 @@ Public Class GetFileDialog
     End Function
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        If pptFilename = "" Then
+            Dim msgbxstatus As MsgBoxResult = MsgBox("Error PPT file not entered", MsgBoxStyle.RetryCancel)
+            If msgbxstatus = MsgBoxResult.Cancel Then
+                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+                Me.Close()
+            End If
+        ElseIf xlsFilename = "" Then
+            Dim msgbxstatus1 As MsgBoxResult = MsgBox("Error XLS file not entered", MsgBoxStyle.RetryCancel)
+            If msgbxstatus1 = MsgBoxResult.Cancel Then
+                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+                Me.Close()
+            End If
+        Else
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
+            Me.Close()
+        End If
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
