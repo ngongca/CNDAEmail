@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 
-Public Class Dialog1
+Public Class GetFileDialog
     Dim pptFilename As String
     Dim xlsFilename As String
 

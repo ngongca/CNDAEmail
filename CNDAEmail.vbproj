@@ -132,11 +132,11 @@
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Microsoft.Office.Interop.Excel1">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.PowerPoint1">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -213,10 +213,10 @@
   -->
   <ItemGroup>
     <AppDesigner Include="My Project\" />
-    <Compile Include="Dialog1.Designer.vb">
-      <DependentUpon>Dialog1.vb</DependentUpon>
+    <Compile Include="GetFileDialog.Designer.vb">
+      <DependentUpon>GetFileDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialog1.vb">
+    <Compile Include="GetFileDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CNDAExportAndEmail.Designer.vb">
@@ -234,8 +234,8 @@
     <Compile Include="UserControl1.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Dialog1.resx">
-      <DependentUpon>Dialog1.vb</DependentUpon>
+    <EmbeddedResource Include="GetFileDialog.resx">
+      <DependentUpon>GetFileDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CNDAExportAndEmail.resx">
       <DependentUpon>CNDAExportAndEmail.vb</DependentUpon>

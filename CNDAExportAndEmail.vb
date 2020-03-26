@@ -14,7 +14,7 @@ Public Class CNDAExportAndEmail
         Dim m As Outlook.Inspector = e.Control.Context
         Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
         If mailItem IsNot Nothing Then
-            Dim df As New Dialog1
+            Dim df As New GetFileDialog
             If df.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
                 Dim pptFilename As String = df.GetPptFilename()
                 Dim xlsFilename As String = df.GetXlsFilename()
