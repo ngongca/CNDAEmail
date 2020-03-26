@@ -228,20 +228,11 @@
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UserControl1.Designer.vb">
-      <DependentUpon>UserControl1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl1.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <EmbeddedResource Include="GetFileDialog.resx">
       <DependentUpon>GetFileDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CNDAExportAndEmail.resx">
       <DependentUpon>CNDAExportAndEmail.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="CNDAEmail_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
