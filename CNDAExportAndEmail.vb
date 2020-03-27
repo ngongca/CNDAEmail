@@ -2,10 +2,13 @@
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Tools.Ribbon
 
+
 Public Class CNDAExportAndEmail
     Private Const TO_COL As String = "C2:C50"
     Private Const CC_COL As String = "D2:D50"
     Private Const BCC_COL As String = "E2:E50"
+    Private Const NAME_CELL As String = "A2"
+    Private Const CNDA_CELL As String = "B2"
     Private Sub Ribbon1_Load(ByVal sender As System.Object, ByVal e As RibbonUIEventArgs) Handles MyBase.Load
 
     End Sub
@@ -26,15 +29,51 @@ Public Class CNDAExportAndEmail
         End If
     End Sub
 
+    Public Function ExtractCndaInfo(xlsFilename As String) As CndaUtils.CndaAllInfo
+        Dim xlApp As New Excel.Application
+        Dim xlWb As Excel.Workbook = xlApp.Workbooks.Open(xlsFilename,, True)
+        Dim xlWs As Excel.Worksheet
+        Dim xlAllInfo As New CndaUtils.CndaAllInfo()
+        For Each xlWs In xlWb.Sheets
+            Dim xlInfo As New CndaUtils.CndaInfo()
+            With xlInfo
+                .CustName = xlWs.Range(NAME_CELL).Text
+                .Cnda = xlWs.Range(CNDA_CELL).Text
+            End With
+            For Each c As Excel.Range In xlWs.Range(TO_COL)
+                If c.Text <> "" And c.Row <> 1 Then
+                    xlInfo.ToList.Add(c.Text)
+                ElseIf c.Text = "" Then
+                    Exit For
+                End If
+            Next
+            For Each c As Excel.Range In xlWs.Range(CC_COL)
+                If c.Text <> "" And c.Row <> 1 Then
+                    xlInfo.CcList.Add(c.Text)
+                ElseIf c.Text = "" Then
+                    Exit For
+                End If
+            Next
+            For Each c As Excel.Range In xlWs.Range(BCC_COL)
+                If c.Text <> "" And c.Row <> 1 Then
+                    xlInfo.BccList.Add(c.Text)
+                ElseIf c.Text = "" Then
+                    Exit For
+                End If
+            Next
+        Next
+        ExtractCndaInfo = xlAllInfo
+    End Function
+
     Private Sub ExportAndEmailAll(pptFilename As String, xlsFilename As String, ByVal mailItem As Outlook.MailItem)
         Dim xlApp As New Excel.Application
         Dim xlWb As Excel.Workbook = xlApp.Workbooks.Open(xlsFilename,, True)
         Dim xlWs As Excel.Worksheet
         For Each xlWs In xlWb.Sheets
-            Dim name As String = xlWs.Range("A2").Text
-            Dim cnda As String = xlWs.Range("B2").Text
+            Dim name As String = xlWs.Range(NAME_CELL).Text
+            Dim cnda As String = xlWs.Range(CNDA_CELL).Text
             If MsgBox($"Generate email for {name} with {pptFilename}?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Dim pdfFilename As String = PowerPointToPDF(pptFilename, name, cnda)
+                Dim pdfFilename As String = CNDAPowerPoint.PptToPDF(pptFilename, name, cnda)
                 CreateEmailFromWorksheet(pdfFilename, xlWs, mailItem)
             End If
         Next
@@ -81,68 +120,4 @@ Public Class CNDAExportAndEmail
             End If
         End If
     End Sub
-
-    Function PowerPointToPDF(PPTFilename As String, Name As String, Cnda As String) As String
-        Dim pptApp As New PowerPoint.Application
-        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PPTFilename, WithWindow:=MsoTriState.msoFalse)
-
-        Dim CndaXXX As String = FindRegExp(pptPres, "CNDA#+")
-        FindReplaceAll(pptPres, CndaXXX, Cnda)
-        FindReplaceAll(pptPres, "CustName", Name)
-
-        'Write out pdf
-        Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PPTFilename)
-        Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PPTFilename)
-        Dim fullName As String = wPath & "\" & wName & "_" & Name & "_" & Cnda & ".pdf"
-        pptPres.ExportAsFixedFormat(Path:=fullName,
-                                    FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
-                                    Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
-        PowerPointToPDF = fullName
-        pptPres.Close()
-        pptPres = Nothing
-        pptApp.Quit()
-        pptApp = Nothing
-    End Function
-    Sub FindReplaceAll(ByVal pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
-        Dim sld As PowerPoint.Slide
-        Dim shp As PowerPoint.Shape
-        Dim ShpTxt As PowerPoint.TextRange
-        Dim TmpTxt As PowerPoint.TextRange
-
-        'Loop through each slide in Presentation
-        For Each sld In pres.Slides
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    'Store text into a variable
-                    ShpTxt = shp.TextFrame.TextRange
-                    'Find First Instance of "Find" word (if exists)
-                    TmpTxt = ShpTxt.Replace(FindWhat:=FindWord, ReplaceWhat:=ReplaceWord)
-                End If
-            Next shp
-        Next sld
-    End Sub
-    'Find the FIRST occurance of myPattern in the powerpoint and return the value
-    Function FindRegExp(ByVal pres As PowerPoint.Presentation, myPattern As String)
-        FindRegExp = myPattern
-        Dim sld As PowerPoint.Slide
-        'Loop through each slide in Presentation
-        For Each sld In pres.Slides
-            Dim shp As PowerPoint.Shape
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    'Store text into a variable
-                    Dim ShpTxt As String = shp.TextFrame.TextRange.Text
-                    ' Create a regular expression object.
-                    Dim objRegExp As New RegularExpressions.Regex(myPattern, RegularExpressions.RegexOptions.IgnoreCase)
-                    'Create objects.
-                    'Test whether the String can be compared.
-                    Dim colMatches As RegularExpressions.Match = objRegExp.Match(ShpTxt)
-                    If (colMatches.Success) Then
-                        FindRegExp = colMatches.Value
-                        Exit For
-                    End If
-                End If
-            Next shp
-        Next sld
-    End Function
 End Class
