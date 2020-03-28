@@ -1,5 +1,7 @@
 ﻿Imports Microsoft.Office.Core
-
+''' <summary>
+''' Cnda utilities that work on PowerPoint files
+''' </summary>
 Public Module CndaPPTUtils
     ''' <summary>
     ''' Generates a PDF file from an editied
@@ -35,7 +37,13 @@ Public Module CndaPPTUtils
         End If
         Return retVal
     End Function
-
+    ''' <summary>
+    ''' Generate a standard PDF filename from a PowerPoint filename
+    ''' </summary>
+    ''' <param name="PptFilename">PowerPoint filename</param>
+    ''' <param name="Cnda"></param>
+    ''' <param name="CustName"></param>
+    ''' <returns>Fully qualified PDF file name with path</returns>
     Public Function CndaPdfString(PptFilename As String, Cnda As String, CustName As String) As String
         'Write out pdf
         Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PptFilename)
