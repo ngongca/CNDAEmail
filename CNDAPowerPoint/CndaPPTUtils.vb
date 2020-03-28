@@ -1,7 +1,43 @@
 ﻿Imports Microsoft.Office.Core
 
 Public Module CndaPPTUtils
-    Function PptToPDF(PPTFilename As String, Name As String, Cnda As String) As String
+
+    Public Function PptToPDFs(PptFilename As String, CndaData As CndaAllInfo) As Integer
+        Dim retVal As Integer = 0
+        Dim pptApp As New PowerPoint.Application
+        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse)
+        If pptPres IsNot Nothing Then
+            For Each c As CndaInfo In CndaData.CndaInfos
+                Dim cnda As String = c.Cnda
+                Dim name As String = c.CustName
+                Dim CndaXXX As String = FindRegExp(pptPres, "CNDA#+")
+                FindReplaceAll(pptPres, CndaXXX, cnda)
+                FindReplaceAll(pptPres, "CustName", name)
+
+                Dim fullName As String = CndaPdfString(PptFilename, cnda, name)
+                pptPres.ExportAsFixedFormat(Path:=fullName,
+                                        FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
+                                        Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
+                FindReplaceAll(pptPres, cnda, CndaXXX)
+                FindReplaceAll(pptPres, name, "CustName")
+                retVal += 1
+            Next
+            pptPres.Close()
+            pptPres = Nothing
+            pptApp.Quit()
+            pptApp = Nothing
+        End If
+        Return retVal
+    End Function
+
+    Public Function CndaPdfString(PptFilename As String, Cnda As String, CustName As String) As String
+        'Write out pdf
+        Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PptFilename)
+        Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PptFilename)
+        Return wPath & "\" & wName & "_" & CustName & "_CNDA" & Cnda & ".pdf"
+    End Function
+
+    Public Function PptToPDF(PPTFilename As String, Name As String, Cnda As String) As String
         Dim pptApp As New PowerPoint.Application
         Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PPTFilename, WithWindow:=MsoTriState.msoFalse)
 
@@ -12,7 +48,7 @@ Public Module CndaPPTUtils
         'Write out pdf
         Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PPTFilename)
         Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PPTFilename)
-        Dim fullName As String = wPath & "\" & wName & "_" & Name & "_" & Cnda & ".pdf"
+        Dim fullName As String = wPath & "\" & wName & "_" & Name & "_CNDA" & Cnda & ".pdf"
         pptPres.ExportAsFixedFormat(Path:=fullName,
                                     FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
                                     Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
