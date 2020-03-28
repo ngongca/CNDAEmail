@@ -1,11 +1,17 @@
 ﻿Imports Microsoft.Office.Core
 
 Public Module CndaPPTUtils
-
+    ''' <summary>
+    ''' Generates a PDF file from an editied
+    ''' </summary>
+    ''' <param name="PptFilename"></param>
+    ''' <param name="CndaData"></param>
+    ''' <returns></returns>
     Public Function PptToPDFs(PptFilename As String, CndaData As CndaAllInfo) As Integer
         Dim retVal As Integer = 0
         Dim pptApp As New PowerPoint.Application
-        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse)
+        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse,
+                                                                           ReadOnly:=MsoTriState.msoTrue)
         If pptPres IsNot Nothing Then
             For Each c As CndaInfo In CndaData.CndaInfos
                 Dim cnda As String = c.Cnda

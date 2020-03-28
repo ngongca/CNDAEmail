@@ -1,11 +1,18 @@
-﻿
+﻿''' <summary>
+''' Cnda utilities that require access to Excel spreadsheets
+''' </summary>
 Public Module CndaExcelUtils
+    'TODO remove hard code of columns
     Private Const TO_COL As String = "C2:C50"
     Private Const CC_COL As String = "D2:D50"
     Private Const BCC_COL As String = "E2:E50"
     Private Const NAME_CELL As String = "A2"
     Private Const CNDA_CELL As String = "B2"
-
+    ''' <summary>
+    ''' Parses Excel datasheet for cnda and email information
+    ''' </summary>
+    ''' <param name="xlsFilename">Fully qualified Excel filename to parse</param>
+    ''' <returns>fully populated <c cref="CndaBaseClasses.CndaAllInfo">object</c></returns>
     Public Function ExtractCndaInfo(xlsFilename As String) As CndaAllInfo
         Dim xlApp As New Excel.Application
         Dim xlWb As Excel.Workbook = xlApp.Workbooks.Open(xlsFilename,, True)

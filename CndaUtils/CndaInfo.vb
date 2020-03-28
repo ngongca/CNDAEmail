@@ -1,4 +1,6 @@
-﻿
+﻿''' <summary>
+''' Stores Cnda and email information for a single customer
+''' </summary>
 Public Class CndaInfo
     Public Property CustName As String
     Public Property ToList As New List(Of String)
