@@ -38,6 +38,33 @@ Public Module CndaPPTUtils
         Return retVal
     End Function
     ''' <summary>
+    ''' Generates PDF files using CndaAllInfo on the current presentation.
+    ''' </summary>
+    ''' <param name="PptPres"></param>
+    ''' <param name="CndaData"></param>
+    ''' <returns>Number of files generated</returns>
+    Public Function PptToPDFs(PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
+        Dim retVal As Integer = 0
+        If PptPres IsNot Nothing Then
+            For Each c As CndaInfo In CndaData.CndaInfos
+                Dim cnda As String = c.Cnda
+                Dim name As String = c.CustName
+                Dim CndaXXX As String = FindRegExp(PptPres, "CNDA#+")
+                FindReplaceAll(PptPres, CndaXXX, cnda)
+                FindReplaceAll(PptPres, "CustName", name)
+
+                Dim fullName As String = CndaPdfString(PptPres.FullName, cnda, name)
+                PptPres.ExportAsFixedFormat(Path:=fullName,
+                                        FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
+                                        Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
+                FindReplaceAll(PptPres, cnda, CndaXXX)
+                FindReplaceAll(PptPres, name, "CustName")
+                retVal += 1
+            Next
+        End If
+        Return retVal
+    End Function
+    ''' <summary>
     ''' Generate a standard PDF filename from a PowerPoint filename
     ''' </summary>
     ''' <param name="PptFilename">PowerPoint filename</param>

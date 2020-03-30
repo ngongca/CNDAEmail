@@ -1,7 +1,7 @@
 ﻿Partial Class CNDAPowerPointRibbon
     Inherits Microsoft.Office.Tools.Ribbon.RibbonBase
 
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Public Sub New(ByVal container As System.ComponentModel.IContainer)
         MyClass.New()
 
@@ -12,7 +12,7 @@
 
     End Sub
 
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Public Sub New()
         MyBase.New(Globals.Factory.GetRibbonFactory())
 
@@ -22,7 +22,7 @@
     End Sub
 
     'Component overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -39,10 +39,11 @@
     'NOTE: The following procedure is required by the Component Designer
     'It can be modified using the Component Designer.
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.PPTTab1 = Me.Factory.CreateRibbonTab
         Me.CNDAGroup = Me.Factory.CreateRibbonGroup
+        Me.PptOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.GeneratePDFButton = Me.Factory.CreateRibbonButton
         Me.PPTTab1.SuspendLayout()
         Me.CNDAGroup.SuspendLayout()
@@ -60,6 +61,11 @@
         Me.CNDAGroup.Items.Add(Me.GeneratePDFButton)
         Me.CNDAGroup.Label = "CNDA Tools"
         Me.CNDAGroup.Name = "CNDAGroup"
+        '
+        'PptOpenXlsFileDialog
+        '
+        Me.PptOpenXlsFileDialog.FileName = "PptOpenXlsFileDialog"
+        Me.PptOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All|*.*"
         '
         'GeneratePDFButton
         '
@@ -85,6 +91,7 @@
     Friend WithEvents PPTTab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents CNDAGroup As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents GeneratePDFButton As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents PptOpenXlsFileDialog As Windows.Forms.OpenFileDialog
 End Class
 
 Partial Class ThisRibbonCollection

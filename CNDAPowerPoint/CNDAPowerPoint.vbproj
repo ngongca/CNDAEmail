@@ -185,6 +185,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CndaPPTUtils.vb" />
+    <Compile Include="GetExcelFileDialog.Designer.vb">
+      <DependentUpon>GetExcelFileDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GetExcelFileDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
     <EmbeddedResource Include="CNDAPowerPointRibbon.resx">
       <DependentUpon>CNDAPowerPointRibbon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetExcelFileDialog.resx">
+      <DependentUpon>GetExcelFileDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -221,10 +230,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CndaExcel\CndaExcel.vbproj">
+      <Project>{2ac5f7f0-2919-4e56-bff6-8b05dfcb68f0}</Project>
+      <Name>CndaExcel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CndaUtils\CndaBaseClasses.vbproj">
       <Project>{7dc76afe-d100-4b48-95b7-4a7c6bd34550}</Project>
       <Name>CndaBaseClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Examples\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
