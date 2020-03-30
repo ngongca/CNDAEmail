@@ -30,7 +30,7 @@ Partial Class GetFileDialog
         Me.PPT_Label = New System.Windows.Forms.Label()
         Me.XLS_Label = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.PptFileInstructionLabel = New System.Windows.Forms.Label()
         Me.OpenPPTFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.OpenXLSFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -115,14 +115,14 @@ Partial Class GetFileDialog
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "XLS file containing NDA info and email addresses"
         '
-        'Label4
+        'PptFileInstructionLabel
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(32, 9)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(181, 13)
-        Me.Label4.TabIndex = 6
-        Me.Label4.Text = "PPT file to update and export to PDF"
+        Me.PptFileInstructionLabel.AutoSize = True
+        Me.PptFileInstructionLabel.Location = New System.Drawing.Point(32, 9)
+        Me.PptFileInstructionLabel.Name = "PptFileInstructionLabel"
+        Me.PptFileInstructionLabel.Size = New System.Drawing.Size(181, 13)
+        Me.PptFileInstructionLabel.TabIndex = 6
+        Me.PptFileInstructionLabel.Text = "PPT file to update and export to PDF"
         '
         'OpenPPTFileDialog
         '
@@ -134,14 +134,14 @@ Partial Class GetFileDialog
         Me.OpenXLSFileDialog.Filter = "Excel Files|*.xls?"
         Me.OpenXLSFileDialog.Title = "Select CNDA Excel File"
         '
-        'Dialog1
+        'GetFileDialog
         '
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(435, 147)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.PptFileInstructionLabel)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.XLS_Label)
         Me.Controls.Add(Me.PPT_Label)
@@ -151,7 +151,7 @@ Partial Class GetFileDialog
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "Dialog1"
+        Me.Name = "GetFileDialog"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Enter File Data"
@@ -168,7 +168,7 @@ Partial Class GetFileDialog
     Friend WithEvents PPT_Label As Windows.Forms.Label
     Friend WithEvents XLS_Label As Windows.Forms.Label
     Friend WithEvents Label3 As Windows.Forms.Label
-    Friend WithEvents Label4 As Windows.Forms.Label
+    Friend WithEvents PptFileInstructionLabel As Windows.Forms.Label
     Friend WithEvents OpenPPTFileDialog As Windows.Forms.OpenFileDialog
     Friend WithEvents OpenXLSFileDialog As Windows.Forms.OpenFileDialog
 End Class

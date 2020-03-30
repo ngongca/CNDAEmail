@@ -43,7 +43,8 @@
     Private Sub InitializeComponent()
         Me.Tab1 = Me.Factory.CreateRibbonTab
         Me.CNDA_Group = Me.Factory.CreateRibbonGroup
-        Me.CNDAUpdateEmail_Button = Me.Factory.CreateRibbonButton
+        Me.CNDAExportAndEmail_Button = Me.Factory.CreateRibbonButton
+        Me.CNDAEmailButton = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
         Me.CNDA_Group.SuspendLayout()
         Me.SuspendLayout()
@@ -57,17 +58,26 @@
         '
         'CNDA_Group
         '
-        Me.CNDA_Group.Items.Add(Me.CNDAUpdateEmail_Button)
+        Me.CNDA_Group.Items.Add(Me.CNDAExportAndEmail_Button)
+        Me.CNDA_Group.Items.Add(Me.CNDAEmailButton)
         Me.CNDA_Group.Label = "CNDA Tools"
         Me.CNDA_Group.Name = "CNDA_Group"
         '
-        'CNDAUpdateEmail_Button
+        'CNDAExportAndEmail_Button
         '
-        Me.CNDAUpdateEmail_Button.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
-        Me.CNDAUpdateEmail_Button.Label = "CNDA Update and Email"
-        Me.CNDAUpdateEmail_Button.Name = "CNDAUpdateEmail_Button"
-        Me.CNDAUpdateEmail_Button.OfficeImageId = "SendAsPdfAttachment"
-        Me.CNDAUpdateEmail_Button.ShowImage = True
+        Me.CNDAExportAndEmail_Button.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
+        Me.CNDAExportAndEmail_Button.Label = "Genrate PDF and Email"
+        Me.CNDAExportAndEmail_Button.Name = "CNDAExportAndEmail_Button"
+        Me.CNDAExportAndEmail_Button.OfficeImageId = "SendAsPdfAttachment"
+        Me.CNDAExportAndEmail_Button.ShowImage = True
+        '
+        'CNDAEmailButton
+        '
+        Me.CNDAEmailButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
+        Me.CNDAEmailButton.Label = "Generate Email Only"
+        Me.CNDAEmailButton.Name = "CNDAEmailButton"
+        Me.CNDAEmailButton.OfficeImageId = "CreateEmail"
+        Me.CNDAEmailButton.ShowImage = True
         '
         'CNDAExportAndEmail
         '
@@ -84,7 +94,8 @@
 
     Friend WithEvents Tab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents CNDA_Group As Microsoft.Office.Tools.Ribbon.RibbonGroup
-    Friend WithEvents CNDAUpdateEmail_Button As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents CNDAExportAndEmail_Button As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents CNDAEmailButton As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection
