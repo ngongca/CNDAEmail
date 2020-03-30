@@ -4,11 +4,12 @@
 ''' </summary>
 Public Module CndaPPTUtils
     ''' <summary>
-    ''' Generates a PDF file from an editied
+    ''' Generates PDF files using NDA information from the <paramref name="CndaData"/> parameter to edit a PowerPoint deck.  
+    ''' For each worksheet in the workbook, a PDF file is generated.
     ''' </summary>
-    ''' <param name="PptFilename"></param>
-    ''' <param name="CndaData"></param>
-    ''' <returns></returns>
+    ''' <param name="PptFilename">PowerPoint deck to edit</param>
+    ''' <param name="CndaData">contains CNDA information</param>
+    ''' <returns>number of PDF files generated</returns>
     Public Function PptToPDFs(PptFilename As String, CndaData As CndaAllInfo) As Integer
         Dim retVal As Integer = 0
         Dim pptApp As New PowerPoint.Application
@@ -38,10 +39,11 @@ Public Module CndaPPTUtils
         Return retVal
     End Function
     ''' <summary>
-    ''' Generates PDF files using CndaAllInfo on the current presentation.
+    ''' Generates PDF files using data from the <see cref="CndaAllInfo"/> information to edit and export from the
+    ''' <see cref="PowerPoint.Presentation"/> that is provided.
     ''' </summary>
-    ''' <param name="PptPres"></param>
-    ''' <param name="CndaData"></param>
+    ''' <param name="PptPres">Presentation that will be edited</param>
+    ''' <param name="CndaData">contains CNDA information</param>
     ''' <returns>Number of files generated</returns>
     Public Function PptToPDFs(PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
         Dim retVal As Integer = 0
@@ -78,40 +80,16 @@ Public Module CndaPPTUtils
         Return wPath & "\" & wName & "_" & CustName & "_CNDA" & Cnda & ".pdf"
     End Function
 
-    Public Function PptToPDF(PPTFilename As String, Name As String, Cnda As String) As String
-        Dim pptApp As New PowerPoint.Application
-        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PPTFilename, WithWindow:=MsoTriState.msoFalse)
-
-        Dim CndaXXX As String = FindRegExp(pptPres, "CNDA#+")
-        FindReplaceAll(pptPres, CndaXXX, Cnda)
-        FindReplaceAll(pptPres, "CustName", Name)
-
-        'Write out pdf
-        Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PPTFilename)
-        Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PPTFilename)
-        Dim fullName As String = wPath & "\" & wName & "_" & Name & "_CNDA" & Cnda & ".pdf"
-        pptPres.ExportAsFixedFormat(Path:=fullName,
-                                    FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
-                                    Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
-        PptToPDF = fullName
-        pptPres.Close()
-        pptPres = Nothing
-        pptApp.Quit()
-        pptApp = Nothing
-    End Function
     Private Sub FindReplaceAll(ByVal pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
         Dim sld As PowerPoint.Slide
         Dim shp As PowerPoint.Shape
         Dim ShpTxt As PowerPoint.TextRange
         Dim TmpTxt As PowerPoint.TextRange
 
-        'Loop through each slide in Presentation
         For Each sld In pres.Slides
             For Each shp In sld.Shapes
                 If shp.HasTextFrame Then
-                    'Store text into a variable
                     ShpTxt = shp.TextFrame.TextRange
-                    'Find First Instance of "Find" word (if exists)
                     TmpTxt = ShpTxt.Replace(FindWhat:=FindWord, ReplaceWhat:=ReplaceWord)
                 End If
             Next shp

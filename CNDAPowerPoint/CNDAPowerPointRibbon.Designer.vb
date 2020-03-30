@@ -64,7 +64,6 @@
         '
         'PptOpenXlsFileDialog
         '
-        Me.PptOpenXlsFileDialog.FileName = "PptOpenXlsFileDialog"
         Me.PptOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All|*.*"
         '
         'GeneratePDFButton

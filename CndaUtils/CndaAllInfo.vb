@@ -7,5 +7,4 @@ Public Class CndaAllInfo
     ''' </summary>
     ''' <returns></returns>
     Public Property CndaInfos As New List(Of CndaInfo)
-
 End Class

@@ -90,19 +90,19 @@ Partial Class GetFileDialog
         '
         'PPT_Label
         '
-        Me.PPT_Label.AutoSize = True
+        Me.PPT_Label.AutoEllipsis = True
         Me.PPT_Label.Location = New System.Drawing.Point(123, 30)
         Me.PPT_Label.Name = "PPT_Label"
-        Me.PPT_Label.Size = New System.Drawing.Size(108, 13)
+        Me.PPT_Label.Size = New System.Drawing.Size(297, 18)
         Me.PPT_Label.TabIndex = 3
         Me.PPT_Label.Text = "<no ppt file selected>"
         '
         'XLS_Label
         '
-        Me.XLS_Label.AutoSize = True
+        Me.XLS_Label.AutoEllipsis = True
         Me.XLS_Label.Location = New System.Drawing.Point(123, 77)
         Me.XLS_Label.Name = "XLS_Label"
-        Me.XLS_Label.Size = New System.Drawing.Size(105, 13)
+        Me.XLS_Label.Size = New System.Drawing.Size(297, 18)
         Me.XLS_Label.TabIndex = 4
         Me.XLS_Label.Text = "<no xls file selected>"
         '

@@ -16,9 +16,7 @@ Public Class CNDAExportAndEmail
             Dim m As Outlook.Inspector = e.Control.Context
             Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
             If mailItem IsNot Nothing Then
-                Dim xlCndaInfo As New CndaAllInfo()
-                'TODO create constructor of CndaAllInfo with Excel filename)
-                xlCndaInfo = CndaExcel.ExtractCndaInfo(df.GetXlsFilename)
+                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(df.GetXlsFilename)
                 If CNDAPowerPoint.PptToPDFs(df.GetPptFilename, xlCndaInfo) > 0 Then
                     For Each c As CndaInfo In xlCndaInfo.CndaInfos
                         CreateEmailWithAttachment(CNDAPowerPoint.CndaPdfString(df.GetPptFilename, c.Cnda, c.CustName), c,
@@ -43,9 +41,7 @@ Public Class CNDAExportAndEmail
             Dim m As Outlook.Inspector = e.Control.Context
             Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
             If mailItem IsNot Nothing Then
-                Dim xlCndaInfo As New CndaAllInfo()
-                'TODO create constructor of CndaAllInfo with Excel filename)
-                xlCndaInfo = CndaExcel.ExtractCndaInfo(df.GetXlsFilename)
+                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(df.GetXlsFilename)
                 For Each c As CndaInfo In xlCndaInfo.CndaInfos
                     Dim pdfFileName As String = CNDAPowerPoint.CndaPdfString(df.GetPptFilename, c.Cnda, c.CustName)
                     If File.Exists(pdfFileName) Then
