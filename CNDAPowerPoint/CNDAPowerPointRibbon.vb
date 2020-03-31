@@ -6,7 +6,7 @@ Public Class CNDAPowerPointRibbon
     End Sub
 
     Private Sub GeneratePDFButton_Click(sender As Object, e As RibbonControlEventArgs) Handles GeneratePDFButton.Click
-        If PptOpenXlsFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If PptOpenXlsFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim xlsFileName As String = PptOpenXlsFileDialog.FileName
             Dim xlsCndaInfo As New CndaAllInfo()
             xlsCndaInfo = CndaExcel.ExtractCndaInfo(xlsFilename:=xlsFileName)
@@ -17,4 +17,7 @@ Public Class CNDAPowerPointRibbon
         End If
     End Sub
 
+    Private Sub PptOpenXlsFileDialog_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles PptOpenXlsFileDialog.FileOk
+
+    End Sub
 End Class

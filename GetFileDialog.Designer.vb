@@ -163,12 +163,12 @@ Partial Class GetFileDialog
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents OK_Button As System.Windows.Forms.Button
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-    Friend WithEvents SelectPPT_Button As Windows.Forms.Button
-    Friend WithEvents SelectXLS_Button As Windows.Forms.Button
-    Friend WithEvents PPT_Label As Windows.Forms.Label
-    Friend WithEvents XLS_Label As Windows.Forms.Label
-    Friend WithEvents Label3 As Windows.Forms.Label
-    Friend WithEvents PptFileInstructionLabel As Windows.Forms.Label
-    Friend WithEvents OpenPPTFileDialog As Windows.Forms.OpenFileDialog
-    Friend WithEvents OpenXLSFileDialog As Windows.Forms.OpenFileDialog
+    Friend WithEvents SelectPPT_Button As System.Windows.Forms.Button
+    Friend WithEvents SelectXLS_Button As System.Windows.Forms.Button
+    Friend WithEvents PPT_Label As System.Windows.Forms.Label
+    Friend WithEvents XLS_Label As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents PptFileInstructionLabel As System.Windows.Forms.Label
+    Friend WithEvents OpenPPTFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents OpenXLSFileDialog As System.Windows.Forms.OpenFileDialog
 End Class

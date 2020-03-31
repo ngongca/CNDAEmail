@@ -43,8 +43,8 @@
     Private Sub InitializeComponent()
         Me.PPTTab1 = Me.Factory.CreateRibbonTab
         Me.CNDAGroup = Me.Factory.CreateRibbonGroup
-        Me.PptOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.GeneratePDFButton = Me.Factory.CreateRibbonButton
+        Me.PptOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.PPTTab1.SuspendLayout()
         Me.CNDAGroup.SuspendLayout()
         Me.SuspendLayout()
@@ -62,10 +62,6 @@
         Me.CNDAGroup.Label = "CNDA Tools"
         Me.CNDAGroup.Name = "CNDAGroup"
         '
-        'PptOpenXlsFileDialog
-        '
-        Me.PptOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All|*.*"
-        '
         'GeneratePDFButton
         '
         Me.GeneratePDFButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
@@ -73,6 +69,10 @@
         Me.GeneratePDFButton.Name = "GeneratePDFButton"
         Me.GeneratePDFButton.OfficeImageId = "ExportFile"
         Me.GeneratePDFButton.ShowImage = True
+        '
+        'PptOpenXlsFileDialog
+        '
+        Me.PptOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All|*.*"
         '
         'CNDAPowerPointRibbon
         '
@@ -90,7 +90,7 @@
     Friend WithEvents PPTTab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents CNDAGroup As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents GeneratePDFButton As Microsoft.Office.Tools.Ribbon.RibbonButton
-    Friend WithEvents PptOpenXlsFileDialog As Windows.Forms.OpenFileDialog
+    Friend WithEvents PptOpenXlsFileDialog As System.Windows.Forms.OpenFileDialog
 End Class
 
 Partial Class ThisRibbonCollection

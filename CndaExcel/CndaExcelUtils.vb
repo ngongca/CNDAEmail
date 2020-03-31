@@ -49,9 +49,13 @@ Public Module CndaExcelUtils
                 Next
                 xlAllInfo.CndaInfos.Add(xlInfo)
             Next
+            xlWb.Close()
+            xlWb = Nothing
         Else
             MsgBox($"Error - could not open {xlsFilename}", MsgBoxStyle.Exclamation)
         End If
+        xlApp.Quit()
+        xlApp = Nothing
         Return xlAllInfo
     End Function
 

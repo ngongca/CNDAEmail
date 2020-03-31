@@ -1,4 +1,4 @@
-﻿Imports System.Windows.Forms
+﻿Imports System
 
 Public Class GetFileDialog
     Dim pptFilename As String = ""
