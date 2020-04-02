@@ -16,18 +16,18 @@ Public Class GetFileDialog
         If pptFilename = "" Then
             Dim msgbxstatus As MsgBoxResult = MsgBox("Error PPT file not entered", MsgBoxStyle.RetryCancel)
             If msgbxstatus = MsgBoxResult.Cancel Then
-                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-                Me.Close()
+                DialogResult = System.Windows.Forms.DialogResult.Cancel
+                Close()
             End If
         ElseIf xlsFilename = "" Then
             Dim msgbxstatus1 As MsgBoxResult = MsgBox("Error XLS file not entered", MsgBoxStyle.RetryCancel)
             If msgbxstatus1 = MsgBoxResult.Cancel Then
-                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-                Me.Close()
+                DialogResult = System.Windows.Forms.DialogResult.Cancel
+                Close()
             End If
         Else
-            Me.DialogResult = System.Windows.Forms.DialogResult.OK
-            Me.Close()
+            DialogResult = System.Windows.Forms.DialogResult.OK
+            Close()
         End If
     End Sub
 

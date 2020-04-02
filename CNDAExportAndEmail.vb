@@ -60,15 +60,17 @@ Public Class CNDAExportAndEmail
     End Sub
 
     ''' <summary>
-    ''' Create a copy of a reference email based on the Cnda Info, attaches a file and moves to current draft folder
+    ''' Create a copy of a reference email based on the Cnda Info, attaches a file it it exists and moves to current draft folder
     ''' </summary>
-    ''' <param name="AttachmentName"></param>
+    ''' <param name="AttachmentName">Name of file to attach.  If Nothing, then no attachment will be made</param>
     ''' <param name="Info"></param>
     ''' <param name="RefMail"></param>
     Private Sub CreateEmailWithAttachment(AttachmentName As String, Info As CndaBaseClasses.CndaInfo, RefMail As Outlook.MailItem)
         If (RefMail IsNot Nothing) Then
             Dim curMail As Outlook.MailItem = RefMail.Copy
-            Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
+            If File.Exists(AttachmentName) Then
+                Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
+            End If
             For Each c As String In Info.ToList
                 Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
                 recipient1.Type = Outlook.OlMailRecipientType.olTo
@@ -86,6 +88,26 @@ Public Class CNDAExportAndEmail
                 MsgBox("Error cannot find Drafts folder in Outlook", MsgBoxStyle.Critical)
             Else
                 curMail.Move(folder)
+            End If
+        End If
+    End Sub
+    ''' <summary>
+    ''' A click on this button generates emails only based on Cnda Info without attachments
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub CNDAEmailOnlyButton_Click(sender As Object, e As RibbonControlEventArgs) Handles CNDAEmailOnlyButton.Click
+        If CndaOutlookOpenXlsFileDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            Dim m As Outlook.Inspector = e.Control.Context
+            Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
+            If mailItem IsNot Nothing Then
+                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(CndaOutlookOpenXlsFileDialog.FileName)
+                For Each c As CndaInfo In xlCndaInfo.CndaInfos
+                    CreateEmailWithAttachment("", c, mailItem)
+                Next
+                If MsgBox("Email generation complete. See your Drafts folder." & vbCrLf & "Do you with to remove the current email?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    mailItem.Close(Outlook.OlInspectorClose.olDiscard)
+                End If
             End If
         End If
     End Sub

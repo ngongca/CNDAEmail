@@ -45,6 +45,8 @@
         Me.CNDA_Group = Me.Factory.CreateRibbonGroup
         Me.CNDAExportAndEmail_Button = Me.Factory.CreateRibbonButton
         Me.CNDAEmailButton = Me.Factory.CreateRibbonButton
+        Me.CNDAEmailOnlyButton = Me.Factory.CreateRibbonButton
+        Me.CndaOutlookOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.Tab1.SuspendLayout()
         Me.CNDA_Group.SuspendLayout()
         Me.SuspendLayout()
@@ -60,13 +62,14 @@
         '
         Me.CNDA_Group.Items.Add(Me.CNDAExportAndEmail_Button)
         Me.CNDA_Group.Items.Add(Me.CNDAEmailButton)
+        Me.CNDA_Group.Items.Add(Me.CNDAEmailOnlyButton)
         Me.CNDA_Group.Label = "CNDA Tools"
         Me.CNDA_Group.Name = "CNDA_Group"
         '
         'CNDAExportAndEmail_Button
         '
         Me.CNDAExportAndEmail_Button.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
-        Me.CNDAExportAndEmail_Button.Label = "Genrate PDF and Email"
+        Me.CNDAExportAndEmail_Button.Label = "Genrate PDFs and Emails"
         Me.CNDAExportAndEmail_Button.Name = "CNDAExportAndEmail_Button"
         Me.CNDAExportAndEmail_Button.OfficeImageId = "SendAsPdfAttachment"
         Me.CNDAExportAndEmail_Button.ShowImage = True
@@ -74,10 +77,24 @@
         'CNDAEmailButton
         '
         Me.CNDAEmailButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
-        Me.CNDAEmailButton.Label = "Generate Email Only"
+        Me.CNDAEmailButton.Label = "Emails w/Attachements"
         Me.CNDAEmailButton.Name = "CNDAEmailButton"
-        Me.CNDAEmailButton.OfficeImageId = "CreateEmail"
+        Me.CNDAEmailButton.OfficeImageId = "MailMergeMergeToEMail"
         Me.CNDAEmailButton.ShowImage = True
+        '
+        'CNDAEmailOnlyButton
+        '
+        Me.CNDAEmailOnlyButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
+        Me.CNDAEmailOnlyButton.Description = "Generate Emails from Excel Data"
+        Me.CNDAEmailOnlyButton.Label = "Emails Only"
+        Me.CNDAEmailOnlyButton.Name = "CNDAEmailOnlyButton"
+        Me.CNDAEmailOnlyButton.OfficeImageId = "CreateEmail"
+        Me.CNDAEmailOnlyButton.ShowImage = True
+        '
+        'CndaOutlookOpenXlsFileDialog
+        '
+        Me.CndaOutlookOpenXlsFileDialog.FileName = "CndaOutlookOpenXlsFileDialog"
+        Me.CndaOutlookOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All Files|*.*"
         '
         'CNDAExportAndEmail
         '
@@ -96,6 +113,8 @@
     Friend WithEvents CNDA_Group As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents CNDAExportAndEmail_Button As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents CNDAEmailButton As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents CNDAEmailOnlyButton As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents CndaOutlookOpenXlsFileDialog As System.Windows.Forms.OpenFileDialog
 End Class
 
 Partial Class ThisRibbonCollection

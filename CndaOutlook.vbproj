@@ -193,6 +193,7 @@
   <!-- Visual Basic supports importing namespaces (equivalent to "using" statements in C#). -->
   <ItemGroup>
     <Import Include="CndaBaseClasses" />
+    <Import Include="CndaExcel" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections.Generic" />
