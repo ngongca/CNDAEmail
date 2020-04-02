@@ -17,7 +17,11 @@ Public Class CNDAPowerPointRibbon
         End If
     End Sub
 
-    Private Sub PptOpenXlsFileDialog_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles PptOpenXlsFileDialog.FileOk
-
+    Private Sub PptSettingsButton_Click(sender As Object, e As RibbonControlEventArgs) Handles PptSettingsButton.Click
+        Dim settingsDialog As New SettingsDialog()
+        If settingsDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            My.Settings.Save()
+            MsgBox($"here is the custname setting {My.Settings.CNDACustMatch}")
+        End If
     End Sub
 End Class

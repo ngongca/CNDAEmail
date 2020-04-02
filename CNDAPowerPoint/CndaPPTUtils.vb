@@ -19,16 +19,17 @@ Public Module CndaPPTUtils
             For Each c As CndaInfo In CndaData.CndaInfos
                 Dim cnda As String = c.Cnda
                 Dim name As String = c.CustName
-                Dim CndaXXX As String = FindRegExp(pptPres, "CNDA#+")
+
+                Dim CndaXXX As String = FindRegExp(pptPres, My.Settings.CNDARegEx)
                 FindReplaceAll(pptPres, CndaXXX, cnda)
-                FindReplaceAll(pptPres, "CustName", name)
+                FindReplaceAll(pptPres, My.Settings.CNDACustMatch, name)
 
                 Dim fullName As String = CndaPdfString(PptFilename, cnda, name)
                 pptPres.ExportAsFixedFormat(Path:=fullName,
                                         FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
                                         Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
                 FindReplaceAll(pptPres, cnda, CndaXXX)
-                FindReplaceAll(pptPres, name, "CustName")
+                FindReplaceAll(pptPres, name, My.Settings.CNDACustMatch)
                 retVal += 1
             Next
             pptPres.Close()
@@ -51,16 +52,17 @@ Public Module CndaPPTUtils
             For Each c As CndaInfo In CndaData.CndaInfos
                 Dim cnda As String = c.Cnda
                 Dim name As String = c.CustName
-                Dim CndaXXX As String = FindRegExp(PptPres, "CNDA#+")
+
+                Dim CndaXXX As String = FindRegExp(PptPres, My.Settings.CNDARegEx)
                 FindReplaceAll(PptPres, CndaXXX, cnda)
-                FindReplaceAll(PptPres, "CustName", name)
+                FindReplaceAll(PptPres, My.Settings.CNDACustMatch, name)
 
                 Dim fullName As String = CndaPdfString(PptPres.FullName, cnda, name)
                 PptPres.ExportAsFixedFormat(Path:=fullName,
                                         FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
                                         Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
                 FindReplaceAll(PptPres, cnda, CndaXXX)
-                FindReplaceAll(PptPres, name, "CustName")
+                FindReplaceAll(PptPres, name, My.Settings.CNDACustMatch)
                 retVal += 1
             Next
         End If

@@ -52,6 +52,30 @@ Partial Friend NotInheritable Class MySettings
             Return defaultInstance
         End Get
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("CNDA#+")>  _
+    Public Property CNDARegEx() As String
+        Get
+            Return CType(Me("CNDARegEx"),String)
+        End Get
+        Set
+            Me("CNDARegEx") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("CustName")>  _
+    Public Property CNDACustMatch() As String
+        Get
+            Return CType(Me("CNDACustMatch"),String)
+        End Get
+        Set
+            Me("CNDACustMatch") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

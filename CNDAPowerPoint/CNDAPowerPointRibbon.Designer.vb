@@ -44,6 +44,7 @@
         Me.PPTTab1 = Me.Factory.CreateRibbonTab
         Me.CNDAGroup = Me.Factory.CreateRibbonGroup
         Me.GeneratePDFButton = Me.Factory.CreateRibbonButton
+        Me.PptSettingsButton = Me.Factory.CreateRibbonButton
         Me.PptOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.PPTTab1.SuspendLayout()
         Me.CNDAGroup.SuspendLayout()
@@ -59,6 +60,7 @@
         'CNDAGroup
         '
         Me.CNDAGroup.Items.Add(Me.GeneratePDFButton)
+        Me.CNDAGroup.Items.Add(Me.PptSettingsButton)
         Me.CNDAGroup.Label = "CNDA Tools"
         Me.CNDAGroup.Name = "CNDAGroup"
         '
@@ -68,7 +70,16 @@
         Me.GeneratePDFButton.Label = "Generate PDF"
         Me.GeneratePDFButton.Name = "GeneratePDFButton"
         Me.GeneratePDFButton.OfficeImageId = "ExportFile"
+        Me.GeneratePDFButton.ScreenTip = "Modify PPT with CNDA and export to PDF"
         Me.GeneratePDFButton.ShowImage = True
+        '
+        'PptSettingsButton
+        '
+        Me.PptSettingsButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
+        Me.PptSettingsButton.Label = "Add-in Settings"
+        Me.PptSettingsButton.Name = "PptSettingsButton"
+        Me.PptSettingsButton.OfficeImageId = "CurrentViewSettings"
+        Me.PptSettingsButton.ShowImage = True
         '
         'PptOpenXlsFileDialog
         '
@@ -91,6 +102,7 @@
     Friend WithEvents CNDAGroup As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents GeneratePDFButton As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents PptOpenXlsFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents PptSettingsButton As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection
