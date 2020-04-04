@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class GetFileDialog
+Partial Class CndaOutlookGetFileDialog
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -33,6 +33,9 @@ Partial Class GetFileDialog
         Me.PptFileInstructionLabel = New System.Windows.Forms.Label()
         Me.OpenPPTFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.OpenXLSFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.PickEmailFolderButton = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.EmailFolderLabel = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +47,7 @@ Partial Class GetFileDialog
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(277, 106)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(276, 150)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -109,7 +112,7 @@ Partial Class GetFileDialog
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(32, 56)
+        Me.Label3.Location = New System.Drawing.Point(26, 56)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(240, 13)
         Me.Label3.TabIndex = 5
@@ -118,7 +121,7 @@ Partial Class GetFileDialog
         'PptFileInstructionLabel
         '
         Me.PptFileInstructionLabel.AutoSize = True
-        Me.PptFileInstructionLabel.Location = New System.Drawing.Point(32, 9)
+        Me.PptFileInstructionLabel.Location = New System.Drawing.Point(26, 9)
         Me.PptFileInstructionLabel.Name = "PptFileInstructionLabel"
         Me.PptFileInstructionLabel.Size = New System.Drawing.Size(181, 13)
         Me.PptFileInstructionLabel.TabIndex = 6
@@ -134,13 +137,43 @@ Partial Class GetFileDialog
         Me.OpenXLSFileDialog.Filter = "Excel Files|*.xls?"
         Me.OpenXLSFileDialog.Title = "Select CNDA Excel File"
         '
-        'GetFileDialog
+        'PickEmailFolderButton
+        '
+        Me.PickEmailFolderButton.Location = New System.Drawing.Point(26, 118)
+        Me.PickEmailFolderButton.Name = "PickEmailFolderButton"
+        Me.PickEmailFolderButton.Size = New System.Drawing.Size(91, 23)
+        Me.PickEmailFolderButton.TabIndex = 7
+        Me.PickEmailFolderButton.Text = "Email folder"
+        Me.PickEmailFolderButton.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(26, 102)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(161, 13)
+        Me.Label1.TabIndex = 8
+        Me.Label1.Text = "Folder to place generated Emails"
+        '
+        'EmailFolderLabel
+        '
+        Me.EmailFolderLabel.AutoSize = True
+        Me.EmailFolderLabel.Location = New System.Drawing.Point(123, 123)
+        Me.EmailFolderLabel.Name = "EmailFolderLabel"
+        Me.EmailFolderLabel.Size = New System.Drawing.Size(103, 13)
+        Me.EmailFolderLabel.TabIndex = 9
+        Me.EmailFolderLabel.Text = "<no folder selected>"
+        '
+        'CndaOutlookGetFileDialog
         '
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(435, 147)
+        Me.ClientSize = New System.Drawing.Size(434, 191)
+        Me.Controls.Add(Me.EmailFolderLabel)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.PickEmailFolderButton)
         Me.Controls.Add(Me.PptFileInstructionLabel)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.XLS_Label)
@@ -151,7 +184,7 @@ Partial Class GetFileDialog
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "GetFileDialog"
+        Me.Name = "CndaOutlookGetFileDialog"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Enter File Data"
@@ -171,4 +204,7 @@ Partial Class GetFileDialog
     Friend WithEvents PptFileInstructionLabel As System.Windows.Forms.Label
     Friend WithEvents OpenPPTFileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents OpenXLSFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents PickEmailFolderButton As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents EmailFolderLabel As System.Windows.Forms.Label
 End Class

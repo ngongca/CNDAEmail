@@ -10,7 +10,7 @@ Public Class CNDAExportAndEmail
     End Sub
 
     Private Sub CNDAExportAndEmail_Button_Click(sender As Object, e As RibbonControlEventArgs) Handles CNDAExportAndEmail_Button.Click
-        Dim df As New GetFileDialog
+        Dim df As New CndaOutlookGetFileDialog
         df.PptFileInstructionLabel.Text = "PPT file to Generate PDF"
         If df.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
             Dim m As Outlook.Inspector = e.Control.Context
@@ -35,7 +35,7 @@ Public Class CNDAExportAndEmail
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub CNDAEmailButton_Click(sender As Object, e As RibbonControlEventArgs) Handles CNDAEmailButton.Click
-        Dim df As New GetFileDialog
+        Dim df As New CndaOutlookGetFileDialog
         df.PptFileInstructionLabel.Text = "PPT file used to Generate PDF"
         If df.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
             Dim m As Outlook.Inspector = e.Control.Context
@@ -83,7 +83,7 @@ Public Class CNDAExportAndEmail
                 Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
                 recipient1.Type = Outlook.OlMailRecipientType.olBCC
             Next
-            Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderDrafts)
+            Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(My.Settings.MailFolder)
             If folder Is Nothing Then
                 MsgBox("Error cannot find Drafts folder in Outlook", MsgBoxStyle.Critical)
             Else

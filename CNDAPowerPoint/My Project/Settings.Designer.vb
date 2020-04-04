@@ -53,7 +53,11 @@ Partial Friend NotInheritable Class MySettings
         End Get
     End Property
     
+    '''<summary>
+    '''CNDA number regular expression search string
+    '''</summary>
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Configuration.SettingsDescriptionAttribute("CNDA number regular expression search string"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("CNDA#+")>  _
     Public Property CNDARegEx() As String
@@ -65,7 +69,11 @@ Partial Friend NotInheritable Class MySettings
         End Set
     End Property
     
+    '''<summary>
+    '''Customer name search string
+    '''</summary>
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Configuration.SettingsDescriptionAttribute("Customer name search string"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("CustName")>  _
     Public Property CNDACustMatch() As String

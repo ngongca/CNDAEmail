@@ -1,6 +1,6 @@
 ﻿Imports System
 
-Public Class GetFileDialog
+Public Class CndaOutlookGetFileDialog
     Dim pptFilename As String = ""
     Dim xlsFilename As String = ""
 
@@ -37,7 +37,8 @@ Public Class GetFileDialog
     End Sub
 
     Private Sub Dialog1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(My.Settings.MailFolder)
+        EmailFolderLabel.Text = f.Name
     End Sub
 
     Private Sub SelectPPT_Button_Click(sender As Object, e As EventArgs) Handles SelectPPT_Button.Click
@@ -52,4 +53,11 @@ Public Class GetFileDialog
         XLS_Label.Text = xlsFilename
     End Sub
 
+    Private Sub PickEmailFolderButton_Click(sender As Object, e As EventArgs) Handles PickEmailFolderButton.Click
+        Dim dg As Outlook.Folder = Globals.ThisAddIn.Application.Session.PickFolder()
+        If dg IsNot Nothing Then
+            My.Settings.MailFolder = dg.DefaultItemType
+            EmailFolderLabel.Text = dg.Name
+        End If
+    End Sub
 End Class

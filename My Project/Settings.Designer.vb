@@ -52,6 +52,22 @@ Partial Friend NotInheritable Class MySettings
             Return defaultInstance
         End Get
     End Property
+    
+    '''<summary>
+    '''Folder to put generated emails
+    '''</summary>
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Configuration.SettingsDescriptionAttribute("Folder to put generated emails"),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("olFolderDrafts")>  _
+    Public Property MailFolder() As Global.Microsoft.Office.Interop.Outlook.OlDefaultFolders
+        Get
+            Return CType(Me("MailFolder"),Global.Microsoft.Office.Interop.Outlook.OlDefaultFolders)
+        End Get
+        Set
+            Me("MailFolder") = value
+        End Set
+    End Property
 End Class
 
 Namespace My
