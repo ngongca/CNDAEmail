@@ -1,25 +1,17 @@
 ﻿Imports System
 
 Public Class CndaOutlookGetFileDialog
-    Dim pptFilename As String = ""
-    Dim xlsFilename As String = ""
-
-    Public Function GetPptFilename() As String
-        GetPptFilename = pptFilename
-    End Function
-
-    Public Function GetXlsFilename() As String
-        GetXlsFilename = xlsFilename
-    End Function
+    Public Property PptFilename As String = ""
+    Public Property XlsFilename As String = ""
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        If pptFilename = "" Then
+        If PptFilename = "" Then
             Dim msgbxstatus As MsgBoxResult = MsgBox("Error PPT file not entered", MsgBoxStyle.RetryCancel)
             If msgbxstatus = MsgBoxResult.Cancel Then
                 DialogResult = System.Windows.Forms.DialogResult.Cancel
                 Close()
             End If
-        ElseIf xlsFilename = "" Then
+        ElseIf XlsFilename = "" Then
             Dim msgbxstatus1 As MsgBoxResult = MsgBox("Error XLS file not entered", MsgBoxStyle.RetryCancel)
             If msgbxstatus1 = MsgBoxResult.Cancel Then
                 DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -37,26 +29,26 @@ Public Class CndaOutlookGetFileDialog
     End Sub
 
     Private Sub Dialog1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(My.Settings.MailFolder)
+        Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
         EmailFolderLabel.Text = f.Name
     End Sub
 
     Private Sub SelectPPT_Button_Click(sender As Object, e As EventArgs) Handles SelectPPT_Button.Click
         OpenPPTFileDialog.ShowDialog()
-        pptFilename = OpenPPTFileDialog.FileName
-        PPT_Label.Text = pptFilename
+        PptFilename = OpenPPTFileDialog.FileName
+        PPT_Label.Text = PptFilename
     End Sub
 
     Private Sub SelectXLS_Button_Click(sender As Object, e As EventArgs) Handles SelectXLS_Button.Click
         OpenXLSFileDialog.ShowDialog()
-        xlsFilename = OpenXLSFileDialog.FileName
-        XLS_Label.Text = xlsFilename
+        XlsFilename = OpenXLSFileDialog.FileName
+        XLS_Label.Text = XlsFilename
     End Sub
 
     Private Sub PickEmailFolderButton_Click(sender As Object, e As EventArgs) Handles PickEmailFolderButton.Click
         Dim dg As Outlook.Folder = Globals.ThisAddIn.Application.Session.PickFolder()
         If dg IsNot Nothing Then
-            My.Settings.MailFolder = dg.DefaultItemType
+            My.Settings.MailFolderId = dg.EntryID
             EmailFolderLabel.Text = dg.Name
         End If
     End Sub

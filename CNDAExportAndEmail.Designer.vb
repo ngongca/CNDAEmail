@@ -46,7 +46,6 @@
         Me.CNDAExportAndEmail_Button = Me.Factory.CreateRibbonButton
         Me.CNDAEmailButton = Me.Factory.CreateRibbonButton
         Me.CNDAEmailOnlyButton = Me.Factory.CreateRibbonButton
-        Me.CndaOutlookOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.Tab1.SuspendLayout()
         Me.CNDA_Group.SuspendLayout()
         Me.SuspendLayout()
@@ -91,11 +90,6 @@
         Me.CNDAEmailOnlyButton.OfficeImageId = "CreateEmail"
         Me.CNDAEmailOnlyButton.ShowImage = True
         '
-        'CndaOutlookOpenXlsFileDialog
-        '
-        Me.CndaOutlookOpenXlsFileDialog.FileName = "CndaOutlookOpenXlsFileDialog"
-        Me.CndaOutlookOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All Files|*.*"
-        '
         'CNDAExportAndEmail
         '
         Me.Name = "CNDAExportAndEmail"
@@ -114,7 +108,6 @@
     Friend WithEvents CNDAExportAndEmail_Button As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents CNDAEmailButton As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents CNDAEmailOnlyButton As Microsoft.Office.Tools.Ribbon.RibbonButton
-    Friend WithEvents CndaOutlookOpenXlsFileDialog As System.Windows.Forms.OpenFileDialog
 End Class
 
 Partial Class ThisRibbonCollection

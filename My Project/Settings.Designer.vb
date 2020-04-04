@@ -59,13 +59,25 @@ Partial Friend NotInheritable Class MySettings
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Configuration.SettingsDescriptionAttribute("Folder to put generated emails"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("olFolderDrafts")>  _
-    Public Property MailFolder() As Global.Microsoft.Office.Interop.Outlook.OlDefaultFolders
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property MailFolderId() As String
         Get
-            Return CType(Me("MailFolder"),Global.Microsoft.Office.Interop.Outlook.OlDefaultFolders)
+            Return CType(Me("MailFolderId"),String)
         End Get
         Set
-            Me("MailFolder") = value
+            Me("MailFolderId") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("<xls filename>")>  _
+    Public Property XlsFileName() As String
+        Get
+            Return CType(Me("XlsFileName"),String)
+        End Get
+        Set
+            Me("XlsFileName") = value
         End Set
     End Property
 End Class

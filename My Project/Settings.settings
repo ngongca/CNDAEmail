@@ -2,8 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="MailFolder" Description="Folder to put generated emails" Type="Microsoft.Office.Interop.Outlook.OlDefaultFolders" Scope="User">
-      <Value Profile="(Default)">olFolderDrafts</Value>
+    <Setting Name="MailFolderId" Description="Folder to put generated emails" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="XlsFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;xls filename&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
