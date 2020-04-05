@@ -31,6 +31,8 @@ Public Class CndaOutlookGetFileDialog
     Private Sub Dialog1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
         EmailFolderLabel.Text = f.Name
+        XlsFilename = My.Settings.XlsFileName
+        XLS_Label.Text = XlsFilename
     End Sub
 
     Private Sub SelectPPT_Button_Click(sender As Object, e As EventArgs) Handles SelectPPT_Button.Click
@@ -43,6 +45,7 @@ Public Class CndaOutlookGetFileDialog
         OpenXLSFileDialog.ShowDialog()
         XlsFilename = OpenXLSFileDialog.FileName
         XLS_Label.Text = XlsFilename
+        My.Settings.XlsFileName = XlsFilename
     End Sub
 
     Private Sub PickEmailFolderButton_Click(sender As Object, e As EventArgs) Handles PickEmailFolderButton.Click
@@ -52,4 +55,5 @@ Public Class CndaOutlookGetFileDialog
             EmailFolderLabel.Text = dg.Name
         End If
     End Sub
+
 End Class
