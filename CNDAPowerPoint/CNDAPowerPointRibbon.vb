@@ -6,13 +6,13 @@ Public Class CNDAPowerPointRibbon
     End Sub
 
     Private Sub GeneratePDFButton_Click(sender As Object, e As RibbonControlEventArgs) Handles GeneratePDFButton.Click
-        If PptOpenXlsFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            Dim xlsFileName As String = PptOpenXlsFileDialog.FileName
-            Dim xlsCndaInfo As New CndaAllInfo()
-            xlsCndaInfo = CndaExcel.ExtractCndaInfo(xlsFilename:=xlsFileName)
+        PptOpenXMLFileDialog.Title = "Select CNDA data file XML"
+        If PptOpenXMLFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            Dim xmlFileName As String = PptOpenXMLFileDialog.FileName
+            Dim xmlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(XmlFileName:=xmlFileName)
             Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
             Dim pptPres As PowerPoint.Presentation = pptApp.ActivePresentation
-            Dim pdfCnt As Integer = CndaPPTUtils.PptToPDFs(PptPres:=pptPres, CndaData:=xlsCndaInfo)
+            Dim pdfCnt As Integer = CndaPPTUtils.PptToPDFs(PptPres:=pptPres, CndaData:=xmlCndaInfo)
             MsgBox($"PDF Generation completed writing {pdfCnt} files")
         End If
     End Sub

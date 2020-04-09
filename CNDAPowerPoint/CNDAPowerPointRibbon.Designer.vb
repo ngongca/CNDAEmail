@@ -45,7 +45,7 @@
         Me.CNDAGroup = Me.Factory.CreateRibbonGroup
         Me.GeneratePDFButton = Me.Factory.CreateRibbonButton
         Me.PptSettingsButton = Me.Factory.CreateRibbonButton
-        Me.PptOpenXlsFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.PptOpenXMLFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.PPTTab1.SuspendLayout()
         Me.CNDAGroup.SuspendLayout()
         Me.SuspendLayout()
@@ -81,9 +81,10 @@
         Me.PptSettingsButton.OfficeImageId = "CurrentViewSettings"
         Me.PptSettingsButton.ShowImage = True
         '
-        'PptOpenXlsFileDialog
+        'PptOpenXMLFileDialog
         '
-        Me.PptOpenXlsFileDialog.Filter = "Excel Files|*.xls?|All|*.*"
+        Me.PptOpenXMLFileDialog.Filter = "XML Files|*.xml|All|*.*"
+        Me.PptOpenXMLFileDialog.Title = "Select CNDA data XML file"
         '
         'CNDAPowerPointRibbon
         '
@@ -101,7 +102,7 @@
     Friend WithEvents PPTTab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents CNDAGroup As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents GeneratePDFButton As Microsoft.Office.Tools.Ribbon.RibbonButton
-    Friend WithEvents PptOpenXlsFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents PptOpenXMLFileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents PptSettingsButton As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
