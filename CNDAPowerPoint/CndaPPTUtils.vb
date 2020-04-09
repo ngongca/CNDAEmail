@@ -56,7 +56,7 @@ Public Module CndaPPTUtils
                 Dim name As String = c.CustName
 
                 Dim CndaXXX As String = FindRegExp(PptPres, My.Settings.CNDARegEx)
-                FindReplaceAll(PptPres, CndaXXX, cnda)
+                FindReplaceAll(PptPres, "CNDA#+", cnda)
                 FindReplaceAll(PptPres, My.Settings.CNDACustMatch, name)
 
                 Dim fullName As String = CndaPdfString(PptPres.FullName, cnda, name)
@@ -105,18 +105,19 @@ Public Module CndaPPTUtils
     Private Sub FindReplaceAll(ByVal pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
         Dim sld As PowerPoint.Slide
         Dim shp As PowerPoint.Shape
-        Dim ShpTxt As PowerPoint.TextRange
-        Dim TmpTxt As PowerPoint.TextRange
 
         For Each sld In pres.Slides
             For Each shp In sld.Shapes
                 If shp.HasTextFrame Then
-                    ShpTxt = shp.TextFrame.TextRange
-                    TmpTxt = ShpTxt.Replace(FindWhat:=FindWord, ReplaceWhat:=ReplaceWord)
+                    If shp.TextFrame.HasText Then
+                        shp.TextFrame.TextRange.Text = Regex.Replace(shp.TextFrame.TextRange.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
+                    End If
                 End If
             Next shp
             ' Check footer as well
-            Regex.Replace(sld.HeadersFooters.Footer.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
+            If sld.HeadersFooters.Footer.Visible Then
+                sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
+            End If
         Next sld
     End Sub
     'Find the FIRST occurance of myPattern in the powerpoint and return the value
