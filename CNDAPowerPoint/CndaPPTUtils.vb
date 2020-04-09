@@ -1,4 +1,6 @@
 ﻿Imports Microsoft.Office.Core
+Imports System.Text.RegularExpressions
+
 ''' <summary>
 ''' Cnda utilities that work on PowerPoint files
 ''' </summary>
@@ -82,6 +84,24 @@ Public Module CndaPPTUtils
         Return wPath & "\" & wName & "_" & CustName & "_CNDA" & Cnda & ".pdf"
     End Function
 
+    Private Sub FindReplaceAllRegex(ByVal pres As PowerPoint.Presentation, RegEx As String, ReplaceWord As String)
+        Dim sld As PowerPoint.Slide
+        Dim shp As PowerPoint.Shape
+
+        For Each sld In pres.Slides
+            For Each shp In sld.Shapes
+                If shp.HasTextFrame Then
+                    If shp.TextFrame.HasText Then
+                        RegularExpressions.Regex.Replace(shp.TextFrame.TextRange.Text,
+                                                         RegEx,
+                                                         ReplaceWord,
+                                                         RegularExpressions.RegexOptions.IgnoreCase)
+                    End If
+                End If
+            Next shp
+        Next sld
+    End Sub
+
     Private Sub FindReplaceAll(ByVal pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
         Dim sld As PowerPoint.Slide
         Dim shp As PowerPoint.Shape
@@ -95,6 +115,8 @@ Public Module CndaPPTUtils
                     TmpTxt = ShpTxt.Replace(FindWhat:=FindWord, ReplaceWhat:=ReplaceWord)
                 End If
             Next shp
+            ' Check footer as well
+            Regex.Replace(sld.HeadersFooters.Footer.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
         Next sld
     End Sub
     'Find the FIRST occurance of myPattern in the powerpoint and return the value
@@ -106,16 +128,13 @@ Public Module CndaPPTUtils
             Dim shp As PowerPoint.Shape
             For Each shp In sld.Shapes
                 If shp.HasTextFrame Then
-                    'Store text into a variable
-                    Dim ShpTxt As String = shp.TextFrame.TextRange.Text
-                    ' Create a regular expression object.
-                    Dim objRegExp As New RegularExpressions.Regex(myPattern, RegularExpressions.RegexOptions.IgnoreCase)
-                    'Create objects.
-                    'Test whether the String can be compared.
-                    Dim colMatches As RegularExpressions.Match = objRegExp.Match(ShpTxt)
-                    If (colMatches.Success) Then
-                        FindRegExp = colMatches.Value
-                        Exit For
+                    If shp.TextFrame.HasText Then
+                        'Test whether the String can be compared.
+                        Dim colMatches As Match = Regex.Match(shp.TextFrame.TextRange.Text, myPattern, RegexOptions.IgnoreCase)
+                        If colMatches.Success Then
+                            FindRegExp = colMatches.Value
+                            Exit For
+                        End If
                     End If
                 End If
             Next shp
