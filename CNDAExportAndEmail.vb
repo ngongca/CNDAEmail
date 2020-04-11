@@ -95,7 +95,7 @@ Public Class CNDAExportAndEmail
             If File.Exists(AttachmentName) Then
                 Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
             End If
-            For Each c As String In Info.ToList
+            For Each c As String In Info.Tolist
                 Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
                 recipient1.Type = Outlook.OlMailRecipientType.olTo
             Next

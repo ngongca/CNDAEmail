@@ -48,7 +48,7 @@ Public Module CndaPPTUtils
     ''' <param name="PptPres">Presentation that will be edited</param>
     ''' <param name="CndaData">contains CNDA information</param>
     ''' <returns>Number of files generated</returns>
-    Public Function PptToPDFs(PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
+    Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
         Dim retVal As Integer = 0
         If PptPres IsNot Nothing Then
             For Each c As CndaInfo In CndaData.CndaInfos
@@ -83,26 +83,7 @@ Public Module CndaPPTUtils
         Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PptFilename)
         Return wPath & "\" & wName & "_" & CustName & "_CNDA" & Cnda & ".pdf"
     End Function
-
-    Private Sub FindReplaceAllRegex(ByVal pres As PowerPoint.Presentation, RegEx As String, ReplaceWord As String)
-        Dim sld As PowerPoint.Slide
-        Dim shp As PowerPoint.Shape
-
-        For Each sld In pres.Slides
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    If shp.TextFrame.HasText Then
-                        RegularExpressions.Regex.Replace(shp.TextFrame.TextRange.Text,
-                                                         RegEx,
-                                                         ReplaceWord,
-                                                         RegularExpressions.RegexOptions.IgnoreCase)
-                    End If
-                End If
-            Next shp
-        Next sld
-    End Sub
-
-    Private Sub FindReplaceAll(ByVal pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
+    Private Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
         Dim sld As PowerPoint.Slide
         Dim shp As PowerPoint.Shape
 

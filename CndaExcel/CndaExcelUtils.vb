@@ -28,7 +28,7 @@ Public Module CndaExcelUtils
                 End With
                 For Each c As Excel.Range In xlWs.Range(TO_COL)
                     If c.Text <> "" And c.Row <> 1 Then
-                        xlInfo.ToList.Add(c.Text)
+                        xlInfo.Tolist.Add(c.Text)
                     ElseIf c.Text = "" Then
                         Exit For
                     End If
