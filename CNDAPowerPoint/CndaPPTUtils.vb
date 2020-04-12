@@ -18,7 +18,7 @@ Public Module CndaPPTUtils
         Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse,
                                                                            ReadOnly:=MsoTriState.msoTrue)
         If pptPres IsNot Nothing Then
-            For Each c As CndaInfo In CndaData.CndaInfos
+            For Each c As CndaCustInfo In CndaData.CndaInfos
                 Dim cnda As String = c.Cnda
                 Dim name As String = c.CustName
 
@@ -41,7 +41,8 @@ Public Module CndaPPTUtils
         End If
         Return retVal
     End Function
-    ''' <summary>
+    ''' <summary>4b
+    ''' 
     ''' Generates PDF files using data from the <see cref="CndaAllInfo"/> information to edit and export from the
     ''' <see cref="PowerPoint.Presentation"/> that is provided.
     ''' </summary>
@@ -51,22 +52,23 @@ Public Module CndaPPTUtils
     Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
         Dim retVal As Integer = 0
         If PptPres IsNot Nothing Then
-            For Each c As CndaInfo In CndaData.CndaInfos
-                Dim cnda As String = c.Cnda
-                Dim name As String = c.CustName
-
-                Dim CndaXXX As String = FindRegExp(PptPres, My.Settings.CNDARegEx)
-                FindReplaceAll(PptPres, "CNDA#+", cnda)
-                FindReplaceAll(PptPres, My.Settings.CNDACustMatch, name)
-
-                Dim fullName As String = CndaPdfString(PptPres.FullName, cnda, name)
-                PptPres.ExportAsFixedFormat(Path:=fullName,
+            Dim tempfile As String = System.IO.Path.GetTempFileName()
+            PptPres.SaveCopyAs(tempfile)
+            Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
+            For Each c As CndaCustInfo In CndaData.CndaInfos
+                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoCTrue,
+                                                                                 WithWindow:=MsoTriState.msoFalse)
+                FindReplaceAll(tpres, c)
+                Dim fullName As String = CndaPdfString(PptPres.FullName, c.Cnda, c.CustName)
+                tpres.ExportAsFixedFormat(Path:=fullName,
                                         FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
                                         Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
-                FindReplaceAll(PptPres, cnda, CndaXXX)
-                FindReplaceAll(PptPres, name, My.Settings.CNDACustMatch)
+                tpres.Close()
                 retVal += 1
             Next
+            If System.IO.File.Exists(tempfile) Then
+                System.IO.File.Delete(tempfile)
+            End If
         End If
         Return retVal
     End Function
@@ -98,6 +100,31 @@ Public Module CndaPPTUtils
             ' Check footer as well
             If sld.HeadersFooters.Footer.Visible Then
                 sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
+            End If
+        Next sld
+    End Sub
+    Private Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, Info As CndaCustInfo)
+        Dim sld As PowerPoint.Slide
+        Dim shp As PowerPoint.Shape
+
+        For Each sld In pres.Slides
+            For Each shp In sld.Shapes
+                If shp.HasTextFrame Then
+                    If shp.TextFrame.HasText Then
+                        For Each pair In Info.EditList
+                            shp.TextFrame.TextRange.Text = Regex.Replace(shp.TextFrame.TextRange.Text, pair.FindRegExPattern,
+                                                                         pair.ReplaceValue, RegexOptions.IgnoreCase)
+                        Next pair
+                    End If
+                End If
+            Next shp
+            ' Check footer as well
+            If sld.HeadersFooters.Footer.Visible Then
+                For Each pair In Info.EditList
+                    sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text,
+                                                                   pair.FindRegExPattern,
+                                                                   pair.ReplaceValue, RegexOptions.IgnoreCase)
+                Next pair
             End If
         Next sld
     End Sub

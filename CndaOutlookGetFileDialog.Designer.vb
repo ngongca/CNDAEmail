@@ -32,7 +32,7 @@ Partial Class CndaOutlookGetFileDialog
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PptFileInstructionLabel = New System.Windows.Forms.Label()
         Me.OpenPPTFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.OpenXLSFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.OpenXMLFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.PickEmailFolderButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.EmailFolderLabel = New System.Windows.Forms.Label()
@@ -88,7 +88,7 @@ Partial Class CndaOutlookGetFileDialog
         Me.SelectXLS_Button.Name = "SelectXLS_Button"
         Me.SelectXLS_Button.Size = New System.Drawing.Size(91, 23)
         Me.SelectXLS_Button.TabIndex = 2
-        Me.SelectXLS_Button.Text = "Select XLS File"
+        Me.SelectXLS_Button.Text = "Select XML File"
         Me.SelectXLS_Button.UseVisualStyleBackColor = True
         '
         'PPT_Label
@@ -107,16 +107,16 @@ Partial Class CndaOutlookGetFileDialog
         Me.XLS_Label.Name = "XLS_Label"
         Me.XLS_Label.Size = New System.Drawing.Size(297, 18)
         Me.XLS_Label.TabIndex = 4
-        Me.XLS_Label.Text = "<no xls file selected>"
+        Me.XLS_Label.Text = "<no xml file selected>"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(26, 56)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(240, 13)
+        Me.Label3.Size = New System.Drawing.Size(242, 13)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "XLS file containing NDA info and email addresses"
+        Me.Label3.Text = "XML file containing customer and email addresses"
         '
         'PptFileInstructionLabel
         '
@@ -132,10 +132,10 @@ Partial Class CndaOutlookGetFileDialog
         Me.OpenPPTFileDialog.Filter = "Powerpoint files|*.ppt?"
         Me.OpenPPTFileDialog.Title = "Select PPT file to Export"
         '
-        'OpenXLSFileDialog
+        'OpenXMLFileDialog
         '
-        Me.OpenXLSFileDialog.Filter = "Excel Files|*.xls?"
-        Me.OpenXLSFileDialog.Title = "Select CNDA Excel File"
+        Me.OpenXMLFileDialog.Filter = "XML Files|*.xml|All Files|*.*"
+        Me.OpenXMLFileDialog.Title = "Select CNDA XML Customer File"
         '
         'PickEmailFolderButton
         '
@@ -203,7 +203,7 @@ Partial Class CndaOutlookGetFileDialog
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents PptFileInstructionLabel As System.Windows.Forms.Label
     Friend WithEvents OpenPPTFileDialog As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents OpenXLSFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents OpenXMLFileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents PickEmailFolderButton As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents EmailFolderLabel As System.Windows.Forms.Label

@@ -21,8 +21,8 @@ Public Class CndaOutlookEmailOnlyForm
     End Sub
 
     Private Sub GetXlsButton_Click(sender As Object, e As EventArgs) Handles GetXlsButton.Click
-        If XlsOpenFileDialog2.ShowDialog = DialogResult.OK Then
-            XlsFilename = XlsOpenFileDialog2.FileName
+        If XmlOpenFileDialog2.ShowDialog = DialogResult.OK Then
+            XlsFilename = XmlOpenFileDialog2.FileName
             My.Settings.XlsFileName = XlsFilename
             XlsFilenameLabel.Text = XlsFilename
         End If

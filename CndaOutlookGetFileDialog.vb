@@ -42,8 +42,8 @@ Public Class CndaOutlookGetFileDialog
     End Sub
 
     Private Sub SelectXLS_Button_Click(sender As Object, e As EventArgs) Handles SelectXLS_Button.Click
-        OpenXLSFileDialog.ShowDialog()
-        XlsFilename = OpenXLSFileDialog.FileName
+        OpenXMLFileDialog.ShowDialog()
+        XlsFilename = OpenXMLFileDialog.FileName
         XLS_Label.Text = XlsFilename
         My.Settings.XlsFileName = XlsFilename
     End Sub

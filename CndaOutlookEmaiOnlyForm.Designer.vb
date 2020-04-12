@@ -31,7 +31,7 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.GetEmailFolderButton = New System.Windows.Forms.Button()
         Me.XlsFilenameLabel = New System.Windows.Forms.Label()
         Me.EmailFolderLabel = New System.Windows.Forms.Label()
-        Me.XlsOpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
+        Me.XmlOpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,9 +74,9 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(13, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(240, 13)
+        Me.Label1.Size = New System.Drawing.Size(263, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "XLS file containing NDA info and email addresses"
+        Me.Label1.Text = "XML file containing Customer info and email addresses"
         '
         'GetXlsButton
         '
@@ -84,7 +84,7 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.GetXlsButton.Name = "GetXlsButton"
         Me.GetXlsButton.Size = New System.Drawing.Size(92, 23)
         Me.GetXlsButton.TabIndex = 2
-        Me.GetXlsButton.Text = "Select XLS File"
+        Me.GetXlsButton.Text = "Select XML File"
         Me.GetXlsButton.UseVisualStyleBackColor = True
         '
         'Label2
@@ -110,9 +110,9 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.XlsFilenameLabel.AutoSize = True
         Me.XlsFilenameLabel.Location = New System.Drawing.Point(111, 35)
         Me.XlsFilenameLabel.Name = "XlsFilenameLabel"
-        Me.XlsFilenameLabel.Size = New System.Drawing.Size(73, 13)
+        Me.XlsFilenameLabel.Size = New System.Drawing.Size(76, 13)
         Me.XlsFilenameLabel.TabIndex = 5
-        Me.XlsFilenameLabel.Text = "<xls filename>"
+        Me.XlsFilenameLabel.Text = "<xml filename>"
         '
         'EmailFolderLabel
         '
@@ -123,10 +123,10 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.EmailFolderLabel.TabIndex = 6
         Me.EmailFolderLabel.Text = "<email folder>"
         '
-        'XlsOpenFileDialog2
+        'XmlOpenFileDialog2
         '
-        Me.XlsOpenFileDialog2.FileName = "OpenXlsFileDialog2"
-        Me.XlsOpenFileDialog2.Filter = "Excel File|*.xls?|All Files|*.*"
+        Me.XmlOpenFileDialog2.FileName = "OpenXmlFileDialog2"
+        Me.XmlOpenFileDialog2.Filter = "XML File|*.xml|All Files|*.*"
         '
         'CndaOutlookEmailOnlyForm
         '
@@ -148,7 +148,7 @@ Partial Class CndaOutlookEmailOnlyForm
         Me.Name = "CndaOutlookEmailOnlyForm"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Generate Emails From Excel Data"
+        Me.Text = "Generate Emails From XML Customer Data"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -163,5 +163,5 @@ Partial Class CndaOutlookEmailOnlyForm
     Friend WithEvents GetEmailFolderButton As System.Windows.Forms.Button
     Friend WithEvents XlsFilenameLabel As System.Windows.Forms.Label
     Friend WithEvents EmailFolderLabel As System.Windows.Forms.Label
-    Friend WithEvents XlsOpenFileDialog2 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents XmlOpenFileDialog2 As System.Windows.Forms.OpenFileDialog
 End Class

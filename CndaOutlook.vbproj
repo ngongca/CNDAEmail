@@ -198,7 +198,6 @@
   <!-- Visual Basic supports importing namespaces (equivalent to "using" statements in C#). -->
   <ItemGroup>
     <Import Include="CndaBaseClasses" />
-    <Import Include="CndaExcel" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections.Generic" />
@@ -322,10 +321,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="CndaExcel\CndaExcel.vbproj">
-      <Project>{2ac5f7f0-2919-4e56-bff6-8b05dfcb68f0}</Project>
-      <Name>CndaExcel</Name>
-    </ProjectReference>
     <ProjectReference Include="CNDAPowerPoint\CndaPowerPoint.vbproj">
       <Project>{c78213cf-e34e-4aea-8890-669fcd28ddcf}</Project>
       <Name>CndaPowerPoint</Name>

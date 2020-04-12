@@ -257,10 +257,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CndaExcel\CndaExcel.vbproj">
-      <Project>{2ac5f7f0-2919-4e56-bff6-8b05dfcb68f0}</Project>
-      <Name>CndaExcel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CndaUtils\CndaBaseClasses.vbproj">
       <Project>{7dc76afe-d100-4b48-95b7-4a7c6bd34550}</Project>
       <Name>CndaBaseClasses</Name>
@@ -268,9 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Examples\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Sample.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

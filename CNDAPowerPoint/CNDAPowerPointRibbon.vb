@@ -12,8 +12,8 @@ Public Class CNDAPowerPointRibbon
             Dim xmlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(XmlFileName:=xmlFileName)
             Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
             Dim pptPres As PowerPoint.Presentation = pptApp.ActivePresentation
-            Dim pdfCnt As Integer = CndaPPTUtils.PptToPDFs(PptPres:=pptPres, CndaData:=xmlCndaInfo)
-            MsgBox($"PDF Generation completed writing {pdfCnt} files")
+            Dim pdfCnt As Integer = PptToPDFs(PptPres:=pptPres, CndaData:=xmlCndaInfo)
+            MsgBox($"CNDA Tools generated {pdfCnt} PDF files", MsgBoxStyle.Information)
         End If
     End Sub
 

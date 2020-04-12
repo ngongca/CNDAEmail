@@ -20,9 +20,9 @@ Public Class CNDAExportAndEmail
             Dim m As Outlook.Inspector = e.Control.Context
             Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
             If mailItem IsNot Nothing Then
-                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(df.XlsFilename)
+                Dim xlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(df.XlsFilename)
                 If CNDAPowerPoint.PptToPDFs(df.PptFilename, xlCndaInfo) > 0 Then
-                    For Each c As CndaInfo In xlCndaInfo.CndaInfos
+                    For Each c As CndaCustInfo In xlCndaInfo.CndaInfos
                         CreateEmailWithAttachment(CNDAPowerPoint.CndaPdfString(df.PptFilename, c.Cnda, c.CustName), c,
                             mailItem)
                     Next
@@ -45,8 +45,8 @@ Public Class CNDAExportAndEmail
             Dim m As Outlook.Inspector = e.Control.Context
             Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
             If mailItem IsNot Nothing Then
-                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(df.XlsFilename)
-                For Each c As CndaInfo In xlCndaInfo.CndaInfos
+                Dim xlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(df.XlsFilename)
+                For Each c As CndaCustInfo In xlCndaInfo.CndaInfos
                     Dim pdfFileName As String = CNDAPowerPoint.CndaPdfString(df.PptFilename, c.Cnda, c.CustName)
                     If File.Exists(pdfFileName) Then
                         CreateEmailWithAttachment(pdfFileName, c, mailItem)
@@ -73,8 +73,8 @@ Public Class CNDAExportAndEmail
             Dim m As Outlook.Inspector = e.Control.Context
             Dim mailItem As Outlook.MailItem = TryCast(m.CurrentItem, Outlook.MailItem)
             If mailItem IsNot Nothing Then
-                Dim xlCndaInfo As CndaAllInfo = CndaExcel.ExtractCndaInfo(dlg.XlsFilename)
-                For Each c As CndaInfo In xlCndaInfo.CndaInfos
+                Dim xlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(dlg.XlsFilename)
+                For Each c As CndaCustInfo In xlCndaInfo.CndaInfos
                     CreateEmailWithAttachment("", c, mailItem)
                 Next
                 If MsgBox("Email generation complete. See your Drafts folder." & vbCrLf & "Do you with to remove the current email?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
@@ -89,24 +89,24 @@ Public Class CNDAExportAndEmail
     ''' <param name="AttachmentName">Name of file to attach.  If Nothing, then no attachment will be made</param>
     ''' <param name="Info"></param>
     ''' <param name="RefMail"></param>
-    Private Sub CreateEmailWithAttachment(AttachmentName As String, Info As CndaBaseClasses.CndaInfo, RefMail As Outlook.MailItem)
+    Private Sub CreateEmailWithAttachment(AttachmentName As String, Info As CndaBaseClasses.CndaCustInfo, RefMail As Outlook.MailItem)
         If (RefMail IsNot Nothing) Then
             Dim curMail As Outlook.MailItem = RefMail.Copy
             If File.Exists(AttachmentName) Then
                 Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
             End If
-            For Each c As String In Info.Tolist
-                Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
-                recipient1.Type = Outlook.OlMailRecipientType.olTo
-            Next
-            For Each c As String In Info.CcList
-                Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
-                recipient1.Type = Outlook.OlMailRecipientType.olCC
-            Next
-            For Each c As String In Info.BccList
-                Dim recipient1 As Outlook.Recipient = curMail.Recipients.Add(c)
-                recipient1.Type = Outlook.OlMailRecipientType.olBCC
-            Next
+            For Each addr As CndaMailListItem In Info.AddrList
+                Dim recipient As Outlook.Recipient = curMail.Recipients.Add(addr.Address)
+                Select Case addr.AddressType
+                    Case CndaMailListItem.AddressTypeEnum.MailTo
+                        recipient.Type = Outlook.OlMailRecipientType.olTo
+                    Case CndaMailListItem.AddressTypeEnum.MailCC
+                        recipient.Type = Outlook.OlMailRecipientType.olCC
+                    Case CndaMailListItem.AddressTypeEnum.MailBCC
+                        recipient.Type = Outlook.OlMailRecipientType.olBCC
+                End Select
+            Next addr
+
             'Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(My.Settings.MailFolder)
             Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
             If folder Is Nothing Then
