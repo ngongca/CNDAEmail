@@ -5,8 +5,8 @@
     <Setting Name="MailFolderId" Description="Folder to put generated emails" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="XlsFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">&lt;xls filename&gt;</Value>
+    <Setting Name="XmlFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

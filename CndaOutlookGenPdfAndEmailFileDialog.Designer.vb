@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class CndaOutlookGetFileDialog
+Partial Class CndaOutlookGenPDFandEmailFileDialog
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -36,6 +36,8 @@ Partial Class CndaOutlookGetFileDialog
         Me.PickEmailFolderButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.EmailFolderLabel = New System.Windows.Forms.Label()
+        Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox()
+        Me.InfoLabel = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,7 +49,7 @@ Partial Class CndaOutlookGetFileDialog
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(276, 150)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(368, 229)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -61,7 +63,7 @@ Partial Class CndaOutlookGetFileDialog
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(67, 23)
         Me.OK_Button.TabIndex = 0
-        Me.OK_Button.Text = "OK"
+        Me.OK_Button.Text = "Go"
         '
         'Cancel_Button
         '
@@ -84,7 +86,7 @@ Partial Class CndaOutlookGetFileDialog
         '
         'SelectXLS_Button
         '
-        Me.SelectXLS_Button.Location = New System.Drawing.Point(26, 72)
+        Me.SelectXLS_Button.Location = New System.Drawing.Point(26, 113)
         Me.SelectXLS_Button.Name = "SelectXLS_Button"
         Me.SelectXLS_Button.Size = New System.Drawing.Size(91, 23)
         Me.SelectXLS_Button.TabIndex = 2
@@ -103,7 +105,7 @@ Partial Class CndaOutlookGetFileDialog
         'XLS_Label
         '
         Me.XLS_Label.AutoEllipsis = True
-        Me.XLS_Label.Location = New System.Drawing.Point(123, 77)
+        Me.XLS_Label.Location = New System.Drawing.Point(123, 118)
         Me.XLS_Label.Name = "XLS_Label"
         Me.XLS_Label.Size = New System.Drawing.Size(297, 18)
         Me.XLS_Label.TabIndex = 4
@@ -112,7 +114,7 @@ Partial Class CndaOutlookGetFileDialog
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(26, 56)
+        Me.Label3.Location = New System.Drawing.Point(26, 97)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(242, 13)
         Me.Label3.TabIndex = 5
@@ -139,7 +141,7 @@ Partial Class CndaOutlookGetFileDialog
         '
         'PickEmailFolderButton
         '
-        Me.PickEmailFolderButton.Location = New System.Drawing.Point(26, 118)
+        Me.PickEmailFolderButton.Location = New System.Drawing.Point(26, 67)
         Me.PickEmailFolderButton.Name = "PickEmailFolderButton"
         Me.PickEmailFolderButton.Size = New System.Drawing.Size(91, 23)
         Me.PickEmailFolderButton.TabIndex = 7
@@ -149,7 +151,7 @@ Partial Class CndaOutlookGetFileDialog
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(26, 102)
+        Me.Label1.Location = New System.Drawing.Point(26, 51)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(161, 13)
         Me.Label1.TabIndex = 8
@@ -158,19 +160,40 @@ Partial Class CndaOutlookGetFileDialog
         'EmailFolderLabel
         '
         Me.EmailFolderLabel.AutoSize = True
-        Me.EmailFolderLabel.Location = New System.Drawing.Point(123, 123)
+        Me.EmailFolderLabel.Location = New System.Drawing.Point(123, 72)
         Me.EmailFolderLabel.Name = "EmailFolderLabel"
         Me.EmailFolderLabel.Size = New System.Drawing.Size(103, 13)
         Me.EmailFolderLabel.TabIndex = 9
         Me.EmailFolderLabel.Text = "<no folder selected>"
         '
-        'CndaOutlookGetFileDialog
+        'CheckedListBox1
+        '
+        Me.CheckedListBox1.FormattingEnabled = True
+        Me.CheckedListBox1.Location = New System.Drawing.Point(29, 142)
+        Me.CheckedListBox1.Name = "CheckedListBox1"
+        Me.CheckedListBox1.Size = New System.Drawing.Size(197, 94)
+        Me.CheckedListBox1.TabIndex = 10
+        '
+        'InfoLabel
+        '
+        Me.InfoLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InfoLabel.Location = New System.Drawing.Point(232, 136)
+        Me.InfoLabel.Name = "InfoLabel"
+        Me.InfoLabel.Size = New System.Drawing.Size(282, 25)
+        Me.InfoLabel.TabIndex = 11
+        Me.InfoLabel.Text = "Working..."
+        Me.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.InfoLabel.Visible = False
+        '
+        'CndaOutlookGenPDFandEmailFileDialog
         '
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(434, 191)
+        Me.ClientSize = New System.Drawing.Size(526, 270)
+        Me.Controls.Add(Me.InfoLabel)
+        Me.Controls.Add(Me.CheckedListBox1)
         Me.Controls.Add(Me.EmailFolderLabel)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PickEmailFolderButton)
@@ -184,10 +207,10 @@ Partial Class CndaOutlookGetFileDialog
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "CndaOutlookGetFileDialog"
+        Me.Name = "CndaOutlookGenPDFandEmailFileDialog"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Enter File Data"
+        Me.Text = "CNDA PDF and Email"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -207,4 +230,6 @@ Partial Class CndaOutlookGetFileDialog
     Friend WithEvents PickEmailFolderButton As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents EmailFolderLabel As System.Windows.Forms.Label
+    Friend WithEvents CheckedListBox1 As System.Windows.Forms.CheckedListBox
+    Friend WithEvents InfoLabel As System.Windows.Forms.Label
 End Class

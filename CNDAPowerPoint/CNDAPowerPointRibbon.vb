@@ -1,6 +1,8 @@
 ﻿Imports Microsoft.Office.Tools.Ribbon
 
 Public Class CNDAPowerPointRibbon
+    Private WithEvents InfoDialog As CndaInfoForm
+    Private xmlFilename As String
     Private Sub Ribbon1_Load(ByVal sender As System.Object, ByVal e As RibbonUIEventArgs) Handles MyBase.Load
 
     End Sub
@@ -8,13 +10,21 @@ Public Class CNDAPowerPointRibbon
     Private Sub GeneratePDFButton_Click(sender As Object, e As RibbonControlEventArgs) Handles GeneratePDFButton.Click
         PptOpenXMLFileDialog.Title = "Select CNDA data file XML"
         If PptOpenXMLFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            Dim xmlFileName As String = PptOpenXMLFileDialog.FileName
-            Dim xmlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(XmlFileName:=xmlFileName)
-            Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
-            Dim pptPres As PowerPoint.Presentation = pptApp.ActivePresentation
-            Dim pdfCnt As Integer = PptToPDFs(PptPres:=pptPres, CndaData:=xmlCndaInfo)
-            MsgBox($"CNDA Tools generated {pdfCnt} PDF files", MsgBoxStyle.Information)
+            xmlFilename = PptOpenXMLFileDialog.FileName
+            InfoDialog = New CndaInfoForm
+            With InfoDialog
+                .Text = "CNDA PDFs"
+                .StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+                .ShowDialog()
+            End With
         End If
+    End Sub
+
+    Private Sub ReadyToBuildPdfs(ByRef count As Integer) Handles infoDialog.ReadyToBuild
+        Dim xmlCndaInfo As CndaAllInfo = CndaXmlToAllInfo(XmlFileName:=xmlFilename)
+        Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
+        Dim pptPres As PowerPoint.Presentation = pptApp.ActivePresentation
+        count = PptToPDFs(PptPres:=pptPres, CndaData:=xmlCndaInfo)
     End Sub
 
     Private Sub PptSettingsButton_Click(sender As Object, e As RibbonControlEventArgs) Handles PptSettingsButton.Click

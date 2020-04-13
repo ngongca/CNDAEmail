@@ -71,13 +71,13 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("<xls filename>")>  _
-    Public Property XlsFileName() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property XmlFileName() As String
         Get
-            Return CType(Me("XlsFileName"),String)
+            Return CType(Me("XmlFileName"),String)
         End Get
         Set
-            Me("XlsFileName") = value
+            Me("XmlFileName") = value
         End Set
     End Property
 End Class

@@ -219,16 +219,22 @@
   -->
   <ItemGroup>
     <AppDesigner Include="My Project\" />
+    <Compile Include="CndaInfoForm.Designer.vb">
+      <DependentUpon>CndaInfoForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CndaInfoForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CndaOutlookEmaiOnlyForm.Designer.vb">
       <DependentUpon>CndaOutlookEmaiOnlyForm.vb</DependentUpon>
     </Compile>
     <Compile Include="CndaOutlookEmaiOnlyForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CndaOutlookGetFileDialog.Designer.vb">
-      <DependentUpon>CndaOutlookGetFileDialog.vb</DependentUpon>
+    <Compile Include="CndaOutlookGenPdfAndEmailFileDialog.Designer.vb">
+      <DependentUpon>CndaOutlookGenPdfAndEmailFileDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="CndaOutlookGetFileDialog.vb">
+    <Compile Include="CndaOutlookGenPdfAndEmailFileDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CNDAExportAndEmail.Designer.vb">
@@ -240,11 +246,14 @@
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="CndaInfoForm.resx">
+      <DependentUpon>CndaInfoForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CndaOutlookEmaiOnlyForm.resx">
       <DependentUpon>CndaOutlookEmaiOnlyForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CndaOutlookGetFileDialog.resx">
-      <DependentUpon>CndaOutlookGetFileDialog.vb</DependentUpon>
+    <EmbeddedResource Include="CndaOutlookGenPdfAndEmailFileDialog.resx">
+      <DependentUpon>CndaOutlookGenPdfAndEmailFileDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CNDAExportAndEmail.resx">
       <DependentUpon>CNDAExportAndEmail.vb</DependentUpon>
