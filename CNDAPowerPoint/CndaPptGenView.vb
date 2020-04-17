@@ -20,15 +20,16 @@ Public Class CndaPptGenView
     End Sub
 
     Private Sub GetXmlButton_Click(sender As Object, e As EventArgs) Handles GetXmlButton.Click
-        XmlOpenFileDialog2.ShowDialog()
-        XmlFilename = XmlOpenFileDialog2.FileName
-        XmlFilenameLabel.Text = XmlFilename
-        RaiseEvent PptXmlFileChangeEvent(XmlFilename, PptCheckedListBox.Items)
-        PptCheckedListBox.DisplayMember = "CustName"
-        For i = 0 To PptCheckedListBox.Items.Count - 1
-            PptCheckedListBox.SetItemCheckState(i, CheckState.Checked)
-        Next
-        Update()
+        If XmlOpenFileDialog2.ShowDialog() = DialogResult.OK Then
+            XmlFilename = XmlOpenFileDialog2.FileName
+            XmlFilenameLabel.Text = XmlFilename
+            RaiseEvent PptXmlFileChangeEvent(XmlFilename, PptCheckedListBox.Items)
+            PptCheckedListBox.DisplayMember = "CustName"
+            For i = 0 To PptCheckedListBox.Items.Count - 1
+                PptCheckedListBox.SetItemCheckState(i, CheckState.Checked)
+            Next
+            Update()
+        End If
     End Sub
 
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
@@ -62,6 +63,7 @@ Public Class CndaPptGenView
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         DialogResult = DialogResult.Cancel
+        Close()
     End Sub
 
 

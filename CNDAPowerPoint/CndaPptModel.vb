@@ -4,7 +4,7 @@ Public Class CndaPptModel
     Public Property XmlFilename As String
 
     Public Sub New()
-        Me.XmlFilename = My.Settings.XmlFilename
+        Me.XmlFilename = My.Settings.PptXmlFilename
         If XmlFilename <> "" Then
             CustInfoList = CndaXmlToCustInfo(XmlFilename)
         End If

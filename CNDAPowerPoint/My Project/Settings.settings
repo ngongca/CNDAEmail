@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="XmlFilename" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="PptXmlFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Nick\Documents\Development\samplewitharray.xml</Value>
     </Setting>
   </Settings>
 </SettingsFile>

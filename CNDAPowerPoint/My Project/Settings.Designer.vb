@@ -55,13 +55,13 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property XmlFilename() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("C:\Users\Nick\Documents\Development\samplewitharray.xml")>  _
+    Public Property PptXmlFilename() As String
         Get
-            Return CType(Me("XmlFilename"),String)
+            Return CType(Me("PptXmlFilename"),String)
         End Get
         Set
-            Me("XmlFilename") = value
+            Me("PptXmlFilename") = value
         End Set
     End Property
 End Class

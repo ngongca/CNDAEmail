@@ -23,7 +23,7 @@ Public Class CndaPptGenController
                                                  ByRef objList As CheckedListBox.ObjectCollection) Handles PptView.PptXmlFileChangeEvent
         If xmlFilename <> "" Then
             pptModel.UpdateModel(XmlFilename:=xmlFilename)
-            My.Settings.XmlFilename = xmlFilename
+            My.Settings.PptXmlFilename = xmlFilename
             My.Settings.Save()
             objList.Clear()
             For Each o As Object In pptModel.CustInfoList

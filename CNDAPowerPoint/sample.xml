@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CndaAllInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<customer name="Customer 1" cnda="11111">
 		<edit key="CNDA#+">11111</edit>
 		<edit key="CustName">Customer 1</edit>
@@ -27,4 +27,4 @@
 		<edit key="CustName">Customer 4</edit>
 		<edit key="CNDA#+">4</edit>
 	</customer>
-</CndaAllInfo>
+</ArrayOfCustomer>
