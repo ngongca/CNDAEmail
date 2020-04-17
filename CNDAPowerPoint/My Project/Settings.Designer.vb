@@ -53,35 +53,15 @@ Partial Friend NotInheritable Class MySettings
         End Get
     End Property
     
-    '''<summary>
-    '''CNDA number regular expression search string
-    '''</summary>
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsDescriptionAttribute("CNDA number regular expression search string"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("CNDA#+")>  _
-    Public Property CNDARegEx() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property XmlFilename() As String
         Get
-            Return CType(Me("CNDARegEx"),String)
+            Return CType(Me("XmlFilename"),String)
         End Get
         Set
-            Me("CNDARegEx") = value
-        End Set
-    End Property
-    
-    '''<summary>
-    '''Customer name search string
-    '''</summary>
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsDescriptionAttribute("Customer name search string"),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("CustName")>  _
-    Public Property CNDACustMatch() As String
-        Get
-            Return CType(Me("CNDACustMatch"),String)
-        End Get
-        Set
-            Me("CNDACustMatch") = value
+            Me("XmlFilename") = value
         End Set
     End Property
 End Class

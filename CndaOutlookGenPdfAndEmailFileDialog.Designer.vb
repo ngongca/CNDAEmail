@@ -26,7 +26,7 @@ Partial Class CndaOutlookGenPDFandEmailFileDialog
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.SelectPPT_Button = New System.Windows.Forms.Button()
-        Me.SelectXLS_Button = New System.Windows.Forms.Button()
+        Me.SelectXml_Button = New System.Windows.Forms.Button()
         Me.PPT_Label = New System.Windows.Forms.Label()
         Me.XLS_Label = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -84,14 +84,14 @@ Partial Class CndaOutlookGenPDFandEmailFileDialog
         Me.SelectPPT_Button.Text = "Select PPT File"
         Me.SelectPPT_Button.UseVisualStyleBackColor = True
         '
-        'SelectXLS_Button
+        'SelectXml_Button
         '
-        Me.SelectXLS_Button.Location = New System.Drawing.Point(26, 113)
-        Me.SelectXLS_Button.Name = "SelectXLS_Button"
-        Me.SelectXLS_Button.Size = New System.Drawing.Size(91, 23)
-        Me.SelectXLS_Button.TabIndex = 2
-        Me.SelectXLS_Button.Text = "Select XML File"
-        Me.SelectXLS_Button.UseVisualStyleBackColor = True
+        Me.SelectXml_Button.Location = New System.Drawing.Point(26, 113)
+        Me.SelectXml_Button.Name = "SelectXml_Button"
+        Me.SelectXml_Button.Size = New System.Drawing.Size(91, 23)
+        Me.SelectXml_Button.TabIndex = 2
+        Me.SelectXml_Button.Text = "Select XML File"
+        Me.SelectXml_Button.UseVisualStyleBackColor = True
         '
         'PPT_Label
         '
@@ -168,18 +168,20 @@ Partial Class CndaOutlookGenPDFandEmailFileDialog
         '
         'CheckedListBox1
         '
+        Me.CheckedListBox1.CheckOnClick = True
         Me.CheckedListBox1.FormattingEnabled = True
         Me.CheckedListBox1.Location = New System.Drawing.Point(29, 142)
         Me.CheckedListBox1.Name = "CheckedListBox1"
         Me.CheckedListBox1.Size = New System.Drawing.Size(197, 94)
+        Me.CheckedListBox1.Sorted = True
         Me.CheckedListBox1.TabIndex = 10
         '
         'InfoLabel
         '
         Me.InfoLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InfoLabel.Location = New System.Drawing.Point(232, 136)
+        Me.InfoLabel.Location = New System.Drawing.Point(232, 142)
         Me.InfoLabel.Name = "InfoLabel"
-        Me.InfoLabel.Size = New System.Drawing.Size(282, 25)
+        Me.InfoLabel.Size = New System.Drawing.Size(282, 71)
         Me.InfoLabel.TabIndex = 11
         Me.InfoLabel.Text = "Working..."
         Me.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -201,7 +203,7 @@ Partial Class CndaOutlookGenPDFandEmailFileDialog
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.XLS_Label)
         Me.Controls.Add(Me.PPT_Label)
-        Me.Controls.Add(Me.SelectXLS_Button)
+        Me.Controls.Add(Me.SelectXml_Button)
         Me.Controls.Add(Me.SelectPPT_Button)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -220,7 +222,7 @@ Partial Class CndaOutlookGenPDFandEmailFileDialog
     Friend WithEvents OK_Button As System.Windows.Forms.Button
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents SelectPPT_Button As System.Windows.Forms.Button
-    Friend WithEvents SelectXLS_Button As System.Windows.Forms.Button
+    Friend WithEvents SelectXml_Button As System.Windows.Forms.Button
     Friend WithEvents PPT_Label As System.Windows.Forms.Label
     Friend WithEvents XLS_Label As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label

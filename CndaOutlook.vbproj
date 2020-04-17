@@ -243,6 +243,7 @@
     <Compile Include="CNDAExportAndEmail.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CndaOutlookModel.vb" />
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>

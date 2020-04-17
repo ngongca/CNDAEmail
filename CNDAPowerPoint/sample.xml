@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CndaAllInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <customer name="Customer 1" cnda="11111">
-    <edit key="CNDA#+">11111</edit>
-    <edit key="CustName">Customer 1</edit>
-    <address type="MailTo">to1@c1.com</address>
-    <address type="MailTo">to2@c1.com</address>
-    <address type="MailCC">cc1@c1.com</address>
-  </customer>
-  <customer name="Customer 2" cnda="22222">
-    <edit key="CNDA#+">22222</edit>
-    <edit key="CustName">Customer 2</edit>
-    <address type="MailTo">to1@c2.com</address>
-    <address type="MailCC">cc1@c2.com</address>
-    <address type="MailBCC">bcc1@c2.com</address>
-  </customer>
-<customer name="Customer 3" cnda="33333">
-    <edit key="CustName">Customer 3</edit>
-    <edit key="CNDA#+">33333</edit>
-    <address type="MailTo">to1@c3.com</address>
-    <address type="MailTo">to2@c3.com</address>
-    <address type="MailTo">to2@c3.com</address>
-    <address type="MailCC">cc1@c3.com</address>
-    <address type="MailBCC">bcc1@c3.com</address>
-  </customer>
-<customer name="Customer 4" cnda="44444">
-    <edit key="CustName">Customer 4</edit>
-    <edit key="CNDA#+">4</edit>
-  </customer>
+	<customer name="Customer 1" cnda="11111">
+		<edit key="CNDA#+">11111</edit>
+		<edit key="CustName">Customer 1</edit>
+		<address type="MailTo">to1@c1.com</address>
+		<address type="MailTo">to2@c1.com</address>
+		<address type="MailCC">cc1@c1.com</address>
+	</customer>
+	<customer name="Customer 2" cnda="22222">
+		<edit key="CNDA#+">22222</edit>
+		<edit key="CustName">Customer 2</edit>
+		<address type="MailTo">to1@c2.com</address>
+		<address type="MailCC">cc1@c2.com</address>
+		<address type="MailBCC">bcc1@c2.com</address>
+	</customer>
+	<customer name="Customer 3" cnda="33333">
+		<edit key="CustName">Customer 3</edit>
+		<edit key="CNDA#+">33333</edit>
+		<address type="MailTo">to1@c3.com</address>
+		<address type="MailTo">to2@c3.com</address>
+		<address type="MailTo">to2@c3.com</address>
+		<address type="MailCC">cc1@c3.com</address>
+		<address type="MailBCC">bcc1@c3.com</address>
+	</customer>
+	<customer name="Customer 4" cnda="44444">
+		<edit key="CustName">Customer 4</edit>
+		<edit key="CNDA#+">4</edit>
+	</customer>
 </CndaAllInfo>

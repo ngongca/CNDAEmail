@@ -203,26 +203,21 @@
   -->
   <ItemGroup>
     <AppDesigner Include="My Project\" />
-    <Compile Include="CndaInfoForm.Designer.vb">
-      <DependentUpon>CndaInfoForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CndaInfoForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CNDAPowerPointRibbon.Designer.vb">
       <DependentUpon>CNDAPowerPointRibbon.vb</DependentUpon>
     </Compile>
     <Compile Include="CNDAPowerPointRibbon.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CndaPptGenController.vb" />
+    <Compile Include="CndaPptModel.vb" />
     <Compile Include="CndaPPTUtils.vb" />
-    <Compile Include="SettingsDialog.Designer.vb">
-      <DependentUpon>SettingsDialog.vb</DependentUpon>
+    <Compile Include="CndaPptGenView.Designer.vb">
+      <DependentUpon>CndaPptGenView.vb</DependentUpon>
     </Compile>
-    <Compile Include="SettingsDialog.vb">
+    <Compile Include="CndaPptGenView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.vb" />
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -235,14 +230,11 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
-    <EmbeddedResource Include="CndaInfoForm.resx">
-      <DependentUpon>CndaInfoForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CNDAPowerPointRibbon.resx">
       <DependentUpon>CNDAPowerPointRibbon.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsDialog.resx">
-      <DependentUpon>SettingsDialog.vb</DependentUpon>
+    <EmbeddedResource Include="CndaPptGenView.resx">
+      <DependentUpon>CndaPptGenView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

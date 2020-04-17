@@ -64,9 +64,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CndaCustData.vb" />
     <Compile Include="CndaEditPair.vb" />
-    <Compile Include="CndaAllInfo.vb" />
     <Compile Include="CndaCustInfo.vb" />
     <Compile Include="CndaMailListItem.vb" />
     <Compile Include="CndaXmlModule.vb" />

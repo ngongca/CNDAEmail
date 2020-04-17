@@ -2,6 +2,7 @@
 ''' <summary>
 ''' Stores Cnda and email information for a single customer
 ''' </summary>
+<XmlType(TypeName:="customer")>
 Public Class CndaCustInfo
     <XmlAttribute(AttributeName:="name")>
     Public Property CustName As String

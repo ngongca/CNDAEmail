@@ -2,11 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="CNDARegEx" Description="CNDA number regular expression search string" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CNDA#+</Value>
-    </Setting>
-    <Setting Name="CNDACustMatch" Description="Customer name search string" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CustName</Value>
+    <Setting Name="XmlFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -73,34 +73,25 @@
             .Cnda = "22222"
             .CustName = "Customer 2"
         End With
-        Dim a As New CndaAllInfo
-        a.CndaInfos.Add(t)
-        a.CndaInfos.Add(t2)
+        Dim ci As New List(Of CndaCustInfo) From {
+            t,
+            t2
+        }
         Dim tfile As String = System.IO.Path.GetTempFileName()
         MsgBox($"Writing xml {tfile}")
-        CndaAllInfoToXml(tfile, a)
+        CndaCustInfoToXml(tfile, ci)
     End Sub
-    ''' <summary>
-    ''' Read in customer XML file and return a fully populated <see cref="CndaAllInfo"/> object
-    ''' </summary>
-    ''' <param name="XmlFileName">Customer XML file name</param>
-    ''' <returns>Fully populated <see cref="CndaAllInfo"/> object</returns>
-    Public Function CndaXmlToAllInfo(XmlFileName As String) As CndaAllInfo
-        Dim reader As New Xml.Serialization.XmlSerializer(GetType(CndaAllInfo))
-        Dim file As New IO.StreamReader(XmlFileName)
-        CndaXmlToAllInfo = CType(reader.Deserialize(file), CndaAllInfo)
-    End Function
-    ''' <summary>
-    ''' code to serialize the CndaAllInfo objects.
-    ''' </summary>
-    ''' <param name="XmlFilename"></param>
-    ''' <param name="Info"></param>
-    Public Sub CndaAllInfoToXml(XmlFilename As String, Info As CndaAllInfo)
-        Dim mySerializer As New Xml.Serialization.XmlSerializer(GetType(CndaAllInfo))
+    Public Sub CndaCustInfoToXml(XmlFilename As String, Info As List(Of CndaCustInfo))
+        Dim mySerializer As New Xml.Serialization.XmlSerializer(GetType(List(Of CndaCustInfo)))
         ' To write to a file, create a StreamWriter object. 
         MsgBox($"Writing file {XmlFilename}")
         Dim myWriter As New IO.StreamWriter(XmlFilename)
         mySerializer.Serialize(myWriter, Info)
         myWriter.Close()
     End Sub
+    Public Function CndaXmlToCustInfo(XmlFileName As String) As List(Of CndaCustInfo)
+        Dim reader As New Xml.Serialization.XmlSerializer(GetType(List(Of CndaCustInfo)))
+        Dim file As New IO.StreamReader(XmlFileName)
+        CndaXmlToCustInfo = CType(reader.Deserialize(file), List(Of CndaCustInfo))
+    End Function
 End Module

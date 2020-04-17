@@ -5,57 +5,39 @@ Imports System.Text.RegularExpressions
 ''' Cnda utilities that work on PowerPoint files
 ''' </summary>
 Public Module CndaPPTUtils
-    ''' <summary>
-    ''' Generates PDF files using NDA information from the <paramref name="CndaData"/> parameter to edit a PowerPoint deck.  
-    ''' For each worksheet in the workbook, a PDF file is generated.
-    ''' </summary>
-    ''' <param name="PptFilename">PowerPoint deck to edit</param>
-    ''' <param name="CndaData">contains CNDA information</param>
-    ''' <returns>number of PDF files generated</returns>
-    Public Function PptToPDFs(PptFilename As String, CndaData As CndaAllInfo) As Integer
+    Public Function PptToPDFs(PptFilename As String, CustList As List(Of CndaCustInfo)) As Integer
         Dim retVal As Integer = 0
         Dim pptApp As New PowerPoint.Application
         Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse,
                                                                            ReadOnly:=MsoTriState.msoTrue)
         If pptPres IsNot Nothing Then
-            For Each c As CndaCustInfo In CndaData.CndaInfos
-                Dim cnda As String = c.Cnda
-                Dim name As String = c.CustName
-
-                Dim CndaXXX As String = FindRegExp(pptPres, My.Settings.CNDARegEx)
-                FindReplaceAll(pptPres, CndaXXX, cnda)
-                FindReplaceAll(pptPres, My.Settings.CNDACustMatch, name)
-
-                Dim fullName As String = CndaPdfString(PptFilename, cnda, name)
-                pptPres.ExportAsFixedFormat(Path:=fullName,
+            Dim tempfile As String = System.IO.Path.GetTempFileName()
+            pptPres.SaveCopyAs(tempfile)
+            For Each c As CndaCustInfo In CustList
+                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoCTrue,
+                                                                                 WithWindow:=MsoTriState.msoFalse)
+                FindReplaceAll(tpres, c)
+                Dim fullName As String = CndaPdfString(pptPres.FullName, c.Cnda, c.CustName)
+                tpres.ExportAsFixedFormat(Path:=fullName,
                                         FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
                                         Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
-                FindReplaceAll(pptPres, cnda, CndaXXX)
-                FindReplaceAll(pptPres, name, My.Settings.CNDACustMatch)
+                tpres.Close()
                 retVal += 1
             Next
-            pptPres.Close()
-            pptPres = Nothing
-            pptApp.Quit()
-            pptApp = Nothing
+            If System.IO.File.Exists(tempfile) Then
+                System.IO.File.Delete(tempfile)
+            End If
         End If
         Return retVal
     End Function
-    ''' <summary>4b
-    ''' 
-    ''' Generates PDF files using data from the <see cref="CndaAllInfo"/> information to edit and export from the
-    ''' <see cref="PowerPoint.Presentation"/> that is provided.
-    ''' </summary>
-    ''' <param name="PptPres">Presentation that will be edited</param>
-    ''' <param name="CndaData">contains CNDA information</param>
-    ''' <returns>Number of files generated</returns>
-    Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CndaData As CndaAllInfo) As Integer
+
+    Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CustList As List(Of CndaCustInfo)) As Integer
         Dim retVal As Integer = 0
         If PptPres IsNot Nothing Then
             Dim tempfile As String = System.IO.Path.GetTempFileName()
             PptPres.SaveCopyAs(tempfile)
             Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
-            For Each c As CndaCustInfo In CndaData.CndaInfos
+            For Each c As CndaCustInfo In CustList
                 Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoCTrue,
                                                                                  WithWindow:=MsoTriState.msoFalse)
                 FindReplaceAll(tpres, c)
