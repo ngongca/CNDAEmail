@@ -12,4 +12,8 @@ Public Class CndaCustInfo
     Public Property EditList As New List(Of CndaEditPair)
     <XmlElement(ElementName:="address")>
     Public Property AddrList As New List(Of CndaMailListItem)
+
+    Public Overrides Function ToString() As String
+        Return CustName
+    End Function
 End Class

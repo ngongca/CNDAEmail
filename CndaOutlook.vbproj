@@ -225,16 +225,17 @@
     <Compile Include="CndaInfoForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CndaOutlookEmaiOnlyForm.Designer.vb">
-      <DependentUpon>CndaOutlookEmaiOnlyForm.vb</DependentUpon>
+    <Compile Include="CndaOutlookEmailController.vb" />
+    <Compile Include="CndaOutlookEmailView.Designer.vb">
+      <DependentUpon>CndaOutlookEmailView.vb</DependentUpon>
     </Compile>
-    <Compile Include="CndaOutlookEmaiOnlyForm.vb">
+    <Compile Include="CndaOutlookEmailView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CndaOutlookGenPdfAndEmailFileDialog.Designer.vb">
-      <DependentUpon>CndaOutlookGenPdfAndEmailFileDialog.vb</DependentUpon>
+    <Compile Include="CndaOutlookPptView.Designer.vb">
+      <DependentUpon>CndaOutlookPptView.vb</DependentUpon>
     </Compile>
-    <Compile Include="CndaOutlookGenPdfAndEmailFileDialog.vb">
+    <Compile Include="CndaOutlookPptView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CndaOutlookRibbon.Designer.vb">
@@ -245,17 +246,18 @@
     </Compile>
     <Compile Include="CndaOutlookModel.vb" />
     <Compile Include="CndaOutlookUtils.vb" />
+    <Compile Include="ICndaOutlookEvents.vb" />
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
     <EmbeddedResource Include="CndaInfoForm.resx">
       <DependentUpon>CndaInfoForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CndaOutlookEmaiOnlyForm.resx">
-      <DependentUpon>CndaOutlookEmaiOnlyForm.vb</DependentUpon>
+    <EmbeddedResource Include="CndaOutlookEmailView.resx">
+      <DependentUpon>CndaOutlookEmailView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CndaOutlookGenPdfAndEmailFileDialog.resx">
-      <DependentUpon>CndaOutlookGenPdfAndEmailFileDialog.vb</DependentUpon>
+    <EmbeddedResource Include="CndaOutlookPptView.resx">
+      <DependentUpon>CndaOutlookPptView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CndaOutlookRibbon.resx">
       <DependentUpon>CndaOutlookRibbon.vb</DependentUpon>

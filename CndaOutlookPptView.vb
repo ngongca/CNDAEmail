@@ -1,6 +1,6 @@
 ﻿Imports System
 
-Public Class CndaOutlookGenPDFandEmailFileDialog
+Public Class CndaOutlookPptView
     Private PptFilename As String = ""
     Private XmlFilename As String = ""
     Property GeneratePdf As Boolean = True
@@ -11,7 +11,20 @@ Public Class CndaOutlookGenPDFandEmailFileDialog
     Public Event GenerateEmailEvent(ByVal pptFilename As String, ByRef mailCnt As Integer)
     Public Event XmlFileChangeEvent(ByVal xmlFilename As String,
                                     ByRef objList As List(Of CndaCustInfo))
-
+    Private Sub Dialog1_Load(sender As Object, e As EventArgs)
+        Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
+        EmailFolderLabel.Text = f.Name
+        XmlFilename = My.Settings.XmlFileName
+        XLS_Label.Text = XmlFilename
+        Dim custList As List(Of CndaCustInfo) = Nothing
+        RaiseEvent XmlFileChangeEvent(XmlFilename, custList)
+        CheckedListBox1.DisplayMember = "CustName"
+        For Each cust As Object In custList
+            CheckedListBox1.Items.Add(cust)
+        Next cust
+        Update()
+        _generated = False
+    End Sub
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         If _generated Then
             DialogResult = System.Windows.Forms.DialogResult.OK
@@ -62,20 +75,7 @@ Public Class CndaOutlookGenPDFandEmailFileDialog
         Me.Close()
     End Sub
 
-    Private Sub Dialog1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim f As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
-        EmailFolderLabel.Text = f.Name
-        XmlFilename = My.Settings.XmlFileName
-        XLS_Label.Text = XmlFilename
-        Dim custList As List(Of CndaCustInfo) = Nothing
-        RaiseEvent XmlFileChangeEvent(XmlFilename, custList)
-        CheckedListBox1.DisplayMember = "CustName"
-        For Each cust As Object In custList
-            CheckedListBox1.Items.Add(cust)
-        Next cust
-        Update()
-        _generated = False
-    End Sub
+
 
     Private Sub SelectPPT_Button_Click(sender As Object, e As EventArgs) Handles SelectPPT_Button.Click
         OpenPPTFileDialog.ShowDialog()
@@ -107,6 +107,10 @@ Public Class CndaOutlookGenPDFandEmailFileDialog
     End Sub
 
     Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub CndaOutlookEmailView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

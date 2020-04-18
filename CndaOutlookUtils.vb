@@ -1,12 +1,16 @@
-﻿Imports System.IO.Path
+﻿Imports System.IO
 Module CndaOutlookUtils
     ''' <summary>
-    ''' Create a copy of a reference email based on the Cnda Info, attaches a file it it exists and moves to current draft folder
+    ''' Create a copy of a reference email based on the Cnda Info, attaches a file it it exists and moves to outlook <paramref name="Folder"/>
     ''' </summary>
     ''' <param name="AttachmentName">Name of file to attach.  If Nothing, then no attachment will be made</param>
     ''' <param name="Info"></param>
     ''' <param name="RefMail"></param>
-    Public Sub CreateEmailWithAttachment(AttachmentName As String, Info As CndaBaseClasses.CndaCustInfo, RefMail As Outlook.MailItem)
+    ''' <param name="Folder"></param>
+    Public Sub CreateEmailWithAttachment(AttachmentName As String,
+                                         Info As CndaCustInfo,
+                                         RefMail As Outlook.MailItem,
+                                         Folder As Outlook.Folder)
         If (RefMail IsNot Nothing) Then
             Dim curMail As Outlook.MailItem = RefMail.Copy
             If File.Exists(AttachmentName) Then
@@ -24,12 +28,10 @@ Module CndaOutlookUtils
                 End Select
             Next addr
 
-            'Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(My.Settings.MailFolder)
-            Dim folder As Outlook.Folder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
-            If folder Is Nothing Then
-                MsgBox($"Error cannot find {My.Settings.MailFolderId} folder in Outlook", MsgBoxStyle.Critical)
+            If Folder Is Nothing Then
+                MsgBox($"Error cannot find {Folder.MailFolderId} folder in Outlook", MsgBoxStyle.Critical)
             Else
-                curMail.Move(folder)
+                curMail.Move(Folder)
             End If
         End If
     End Sub
