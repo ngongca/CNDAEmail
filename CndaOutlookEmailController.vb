@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 Public Class CndaOutlookEmailController
     Private OtlEmailView As CndaOutlookEmailView
+    Private OtlPptEmailView As CndaOtlPptEmailView
     Private ReadOnly mdl As CndaOutlookModel
     Private WithEvents OtlEmailEvents As ICndaOutlookEvents
 
@@ -14,57 +15,58 @@ Public Class CndaOutlookEmailController
             .XmlFilename = mdl.XmlFileName,
             .MailFolderName = mdl.EmailFolder.Name
         }
+        With mdl
+            .GenPdf = False
+            .PptFileName = ""
+        End With
         OtlEmailEvents = OtlEmailView
         If OtlEmailView.ShowDialog = System.Windows.Forms.DialogResult.Yes Then
             mdl.CurEmail.Close(OlInspectorClose.olDiscard)
         End If
+        OtlEmailView.Dispose()
     End Sub
 
-    Public Sub RunAttacheEmail()
-
+    Public Sub RunAttachEmail()
+        OtlPptEmailView = New CndaOtlPptEmailView With {
+            .XmlFilename = mdl.XmlFileName,
+            .MailFolderName = mdl.EmailFolder.Name
+        }
+        With mdl
+            .GenPdf = False
+            .PptFileName = ""
+        End With
+        OtlEmailEvents = OtlPptEmailView
+        If OtlPptEmailView.ShowDialog = DialogResult.Yes Then
+            mdl.CurEmail.Close(OlInspectorClose.olDiscard)
+        End If
+        OtlPptEmailView.Dispose()
     End Sub
 
     Public Sub RunExportAndEmail()
-        '  GenPdf = New CndaOutlookPptView With {
-        '    .GeneratePdf = True
-        '}
-        '  GenPdf.PptFileInstructionLabel.Text = "CNDA Outlook Generate PDF"
-        '  GenPdf.ShowDialog()
-        '  If MsgBox("Email generation complete" & vbCrLf & "Do you with to remove the current email?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-        '      thisEmail.Close(Outlook.OlInspectorClose.olDiscard)
-        '  End If
+        OtlPptEmailView = New CndaOtlPptEmailView With {
+             .XmlFilename = mdl.XmlFileName,
+             .MailFolderName = mdl.EmailFolder.Name
+         }
+        With mdl
+            .GenPdf = True
+            .PptFileName = ""
+        End With
+        OtlEmailEvents = OtlPptEmailView
+        If OtlPptEmailView.ShowDialog = DialogResult.Yes Then
+            mdl.CurEmail.Close(OlInspectorClose.olDiscard)
+        End If
+        OtlPptEmailView.Dispose()
     End Sub
-    'Private Sub GenPdfEventHandler(pptFilename As String, ByRef obj As List(Of CndaCustInfo)) Handles GenPdf.GeneratePdfEvent
-    '    CNDAPowerPoint.PptToPDFs(pptFilename, obj)
-    'End Sub
-    'Private Sub GenEmailEventHandler(pptFilename As String, ByRef mailCnt As Integer) Handles GenPdf.GenerateEmailEvent
-    '    'mailCnt = 0
-    '    'If thisEmail IsNot Nothing Then
-    '    '    For Each c As CndaCustInfo In mdl.CustInfoList
-    '    '        Dim pdfFileName As String = CNDAPowerPoint.CndaPdfString(PptFilename:=pptFilename, c.Cnda, c.CustName)
-    '    '        If File.Exists(pdfFileName) Then
-    '    '            mdl.CreateEmailWithAttachment(pdfFileName, c, thisEmail)
-    '    '            mailCnt += 1
-    '    '        Else
-    '    '            If MsgBox($"{$"Could not find pdf file {pdfFileName}, no email generated"}{vbCrLf}Continue?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
-    '    '                Exit For
-    '    '            End If
-    '    '        End If
-    '    '    Next
-    '    'End If
-    'End Sub
 
     Private Sub SendEmailsEventHandler(ByRef objList As CheckedListBox.CheckedItemCollection,
-                                       ByRef count As Integer,
-                                       ByVal pptFilename As String,
-                                       ByVal genPdf As Boolean) Handles OtlEmailEvents.SendEmailsEvent
+                                       ByRef count As Integer) Handles OtlEmailEvents.SendEmailsEvent
         count = 0
         If objList IsNot Nothing Then
             For Each obj As CndaCustInfo In objList
                 Dim pdfFilename As String = ""
-                If pptFilename <> "" Then
-                    pdfFilename = CNDAPowerPoint.CndaPdfString(pptFilename, obj.Cnda, obj.CustName)
-                    If genPdf Then
+                If mdl.PptFileName <> "" Then
+                    pdfFilename = CNDAPowerPoint.CndaPdfString(mdl.PptFileName, obj.Cnda, obj.CustName)
+                    If mdl.GenPdf Then
                         'TODO generate the pdf file
                     End If
                 End If
@@ -88,6 +90,12 @@ Public Class CndaOutlookEmailController
             For Each o As Object In mdl.CustInfoList
                 objList.Add(o)
             Next
+        End If
+    End Sub
+
+    Private Sub PptFileChangeEventHandler(ByVal pptFilename As String) Handles OtlEmailEvents.PptFileChangeEvent
+        If pptFilename <> "" Then
+            mdl.PptFileName = pptFilename
         End If
     End Sub
 End Class

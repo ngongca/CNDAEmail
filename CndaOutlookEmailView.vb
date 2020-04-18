@@ -11,8 +11,8 @@ Public Class CndaOutlookEmailView
                                     ByRef objList As CheckedListBox.ObjectCollection) Implements ICndaOutlookEvents.XmlFileChangeEvent
     Public Event EmailFolderChangeEvent(ByRef emailFolder As Outlook.Folder) Implements ICndaOutlookEvents.EmailFolderChangeEvent
     Public Event SendEmailsEvent(ByRef objList As CheckedListBox.CheckedItemCollection,
-                                 ByRef count As Integer, ByVal pptName As String, ByVal genPdf As Boolean) Implements ICndaOutlookEvents.SendEmailsEvent
-
+                                 ByRef count As Integer) Implements ICndaOutlookEvents.SendEmailsEvent
+    Public Event PptFileChangeEvent(pptFilename As String) Implements ICndaOutlookEvents.PptFileChangeEvent
 
     Private Sub CndaOutlookEmailView_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
         XlsFilenameLabel.Text = XmlFilename
@@ -37,7 +37,7 @@ Public Class CndaOutlookEmailView
                 WorkingLabel.Visible = True
                 WorkingLabel.Text = "Generating Emails..."
                 Dim count As Integer
-                RaiseEvent SendEmailsEvent(EmailViewCheckedListBox.CheckedItems, count, "", False)
+                RaiseEvent SendEmailsEvent(EmailViewCheckedListBox.CheckedItems, count)
                 WorkingLabel.Text = $"CNDA generated {count} emails in your {MailFolderName} folder" & vbCrLf _
                 & "Do you wish to delete the current email?"
                 OK_Button1.Text = "YES"

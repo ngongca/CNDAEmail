@@ -13,9 +13,10 @@ Public Class CndaOutlookModel
             My.Settings.Save()
         End Set
     End Property
-
+    Public Property PptFileName As String = ""
     Public Property XmlFileName As String = "<enter xml file>"
     Public Property CurEmail As Outlook.MailItem
+    Public Property GenPdf As Boolean = False
 
     Public Sub New()
 

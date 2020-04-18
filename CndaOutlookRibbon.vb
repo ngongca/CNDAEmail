@@ -17,7 +17,7 @@ Public Class CndaOutlookRibbon
     ''' <param name="e"></param>
     Private Sub CndaEmailButton_Click(sender As Object, e As RibbonControlEventArgs) Handles CNDAEmailButton.Click
         Dim ctl = New CndaOutlookEmailController()
-        ctl.RunAttacheEmail()
+        ctl.RunAttachEmail()
     End Sub
 
 

@@ -76,9 +76,9 @@ Partial Class CndaOutlookEmailView
         Me.XmlLabel1.AutoSize = True
         Me.XmlLabel1.Location = New System.Drawing.Point(13, 62)
         Me.XmlLabel1.Name = "XmlLabel1"
-        Me.XmlLabel1.Size = New System.Drawing.Size(263, 13)
+        Me.XmlLabel1.Size = New System.Drawing.Size(112, 13)
         Me.XmlLabel1.TabIndex = 1
-        Me.XmlLabel1.Text = "XML file containing Customer info and email addresses"
+        Me.XmlLabel1.Text = "Customer info XML file"
         '
         'GetXlsButton
         '
@@ -136,7 +136,7 @@ Partial Class CndaOutlookEmailView
         Me.EmailViewCheckedListBox.FormattingEnabled = True
         Me.EmailViewCheckedListBox.Location = New System.Drawing.Point(13, 109)
         Me.EmailViewCheckedListBox.Name = "EmailViewCheckedListBox"
-        Me.EmailViewCheckedListBox.Size = New System.Drawing.Size(198, 94)
+        Me.EmailViewCheckedListBox.Size = New System.Drawing.Size(236, 94)
         Me.EmailViewCheckedListBox.Sorted = True
         Me.EmailViewCheckedListBox.TabIndex = 7
         '
@@ -144,9 +144,9 @@ Partial Class CndaOutlookEmailView
         '
         Me.WorkingLabel.Enabled = False
         Me.WorkingLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WorkingLabel.Location = New System.Drawing.Point(217, 109)
+        Me.WorkingLabel.Location = New System.Drawing.Point(255, 109)
         Me.WorkingLabel.Name = "WorkingLabel"
-        Me.WorkingLabel.Size = New System.Drawing.Size(324, 61)
+        Me.WorkingLabel.Size = New System.Drawing.Size(286, 61)
         Me.WorkingLabel.TabIndex = 8
         Me.WorkingLabel.Text = "WorkingLabel"
         Me.WorkingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

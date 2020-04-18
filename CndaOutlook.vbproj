@@ -219,10 +219,10 @@
   -->
   <ItemGroup>
     <AppDesigner Include="My Project\" />
-    <Compile Include="CndaInfoForm.Designer.vb">
-      <DependentUpon>CndaInfoForm.vb</DependentUpon>
+    <Compile Include="CndaOtlPptEmailView.Designer.vb">
+      <DependentUpon>CndaOtlPptEmailView.vb</DependentUpon>
     </Compile>
-    <Compile Include="CndaInfoForm.vb">
+    <Compile Include="CndaOtlPptEmailView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CndaOutlookEmailController.vb" />
@@ -230,12 +230,6 @@
       <DependentUpon>CndaOutlookEmailView.vb</DependentUpon>
     </Compile>
     <Compile Include="CndaOutlookEmailView.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CndaOutlookPptView.Designer.vb">
-      <DependentUpon>CndaOutlookPptView.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CndaOutlookPptView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CndaOutlookRibbon.Designer.vb">
@@ -250,14 +244,11 @@
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="CndaInfoForm.resx">
-      <DependentUpon>CndaInfoForm.vb</DependentUpon>
+    <EmbeddedResource Include="CndaOtlPptEmailView.resx">
+      <DependentUpon>CndaOtlPptEmailView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CndaOutlookEmailView.resx">
       <DependentUpon>CndaOutlookEmailView.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CndaOutlookPptView.resx">
-      <DependentUpon>CndaOutlookPptView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CndaOutlookRibbon.resx">
       <DependentUpon>CndaOutlookRibbon.vb</DependentUpon>
