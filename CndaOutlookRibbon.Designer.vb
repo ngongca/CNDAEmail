@@ -1,4 +1,4 @@
-﻿Partial Class CNDAExportAndEmail
+﻿Partial Class CndaOutlookRibbon
     Inherits Microsoft.Office.Tools.Ribbon.RibbonBase
 
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -90,9 +90,9 @@
         Me.CNDAEmailOnlyButton.OfficeImageId = "CreateEmail"
         Me.CNDAEmailOnlyButton.ShowImage = True
         '
-        'CNDAExportAndEmail
+        'CndaOutlookRibbon
         '
-        Me.Name = "CNDAExportAndEmail"
+        Me.Name = "CndaOutlookRibbon"
         Me.RibbonType = "Microsoft.Outlook.Mail.Compose"
         Me.Tabs.Add(Me.Tab1)
         Me.Tab1.ResumeLayout(False)
@@ -113,9 +113,9 @@ End Class
 Partial Class ThisRibbonCollection
 
     <System.Diagnostics.DebuggerNonUserCode()> _
-    Friend ReadOnly Property Ribbon1() As CNDAExportAndEmail
+    Friend ReadOnly Property Ribbon1() As CndaOutlookRibbon
         Get
-            Return Me.GetRibbon(Of CNDAExportAndEmail)()
+            Return Me.GetRibbon(Of CndaOutlookRibbon)()
         End Get
     End Property
 End Class

@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Tools.Ribbon
 Imports System.IO
-Public Class CNDAExportAndEmail
+Public Class CndaOutlookRibbon
     Private CndaOlkMdl As CndaOutlookModel
     Private thisEmail As Outlook.MailItem
     Private WithEvents GenPdf As CndaOutlookGenPDFandEmailFileDialog

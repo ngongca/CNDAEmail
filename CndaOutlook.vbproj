@@ -237,13 +237,14 @@
     <Compile Include="CndaOutlookGenPdfAndEmailFileDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CNDAExportAndEmail.Designer.vb">
-      <DependentUpon>CNDAExportAndEmail.vb</DependentUpon>
+    <Compile Include="CndaOutlookRibbon.Designer.vb">
+      <DependentUpon>CndaOutlookRibbon.vb</DependentUpon>
     </Compile>
-    <Compile Include="CNDAExportAndEmail.vb">
+    <Compile Include="CndaOutlookRibbon.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CndaOutlookModel.vb" />
+    <Compile Include="CndaOutlookUtils.vb" />
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -256,8 +257,8 @@
     <EmbeddedResource Include="CndaOutlookGenPdfAndEmailFileDialog.resx">
       <DependentUpon>CndaOutlookGenPdfAndEmailFileDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CNDAExportAndEmail.resx">
-      <DependentUpon>CNDAExportAndEmail.vb</DependentUpon>
+    <EmbeddedResource Include="CndaOutlookRibbon.resx">
+      <DependentUpon>CndaOutlookRibbon.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="CNDAEmail_TemporaryKey.pfx" />

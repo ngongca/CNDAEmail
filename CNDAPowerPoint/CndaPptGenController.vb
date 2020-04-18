@@ -2,10 +2,10 @@
 Public Class CndaPptGenController
 
     Private WithEvents PptView As CndaPptGenView
-    Private pptModel As CndaPptModel
+    Private pptModel As CndaModel
 
     Public Sub Run()
-        pptModel = New CndaPptModel()
+        pptModel = New CndaModel(My.Settings.PptXmlFilename)
         PptView = New CndaPptGenView()
         PptView.ShowDialog()
     End Sub

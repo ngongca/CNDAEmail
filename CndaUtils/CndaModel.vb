@@ -1,10 +1,10 @@
 ﻿
-Public Class CndaPptModel
+Public Class CndaModel
     Public Property CustInfoList As New List(Of CndaCustInfo)
     Public Property XmlFilename As String
 
-    Public Sub New()
-        Me.XmlFilename = My.Settings.PptXmlFilename
+    Public Sub New(XmlFilename As String)
+        Me.XmlFilename = XmlFilename
         If XmlFilename <> "" Then
             CustInfoList = CndaXmlToCustInfo(XmlFilename)
         End If
@@ -14,13 +14,4 @@ Public Class CndaPptModel
         Me.XmlFilename = XmlFilename
         CustInfoList = CndaXmlToCustInfo(XmlFileName:=Me.XmlFilename)
     End Sub
-
-
-    Public Function CreateCustList(listObject As System.Windows.Forms.CheckedListBox.CheckedItemCollection) As List(Of CndaCustInfo)
-        CreateCustList = New List(Of CndaCustInfo)
-        For Each obj As CndaCustInfo In listObject
-            CreateCustList.Add(obj)
-        Next
-    End Function
-
 End Class
