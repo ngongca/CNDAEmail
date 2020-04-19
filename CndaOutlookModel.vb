@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Public Class CndaOutlookModel
-    Public Property CustInfoList As New List(Of CndaCustInfo)
+    Public ReadOnly Property CustInfoList As New List(Of CndaCustInfo)
+
 
     Private _EmailFolder As Outlook.Folder
     Public Property EmailFolder() As Outlook.Folder
@@ -8,15 +9,19 @@ Public Class CndaOutlookModel
             Return _EmailFolder
         End Get
         Set(AutoPropertyValue As Outlook.Folder)
-            _EmailFolder = AutoPropertyValue
-            My.Settings.MailFolderId = _EmailFolder.EntryID
-            My.Settings.Save()
+            If AutoPropertyValue IsNot Nothing Then
+                _EmailFolder = AutoPropertyValue
+                My.Settings.MailFolderId = _EmailFolder.EntryID
+                My.Settings.Save()
+            End If
         End Set
     End Property
     Public Property PptFileName As String = ""
     Public Property XmlFileName As String = "<enter xml file>"
     Public Property CurEmail As Outlook.MailItem
     Public Property GenPdf As Boolean = False
+    Public Property AttachPdf As Boolean = False
+
 
     Public Sub New()
 
@@ -27,14 +32,12 @@ Public Class CndaOutlookModel
             XmlFileName = My.Settings.XmlFileName
         End If
         'set up this email
-        Try
-            Dim selObject As Object = Globals.ThisAddIn.Application.ActiveInspector.CurrentItem
-            If (TypeOf selObject Is Outlook.MailItem) Then
-                CurEmail = TryCast(selObject, Outlook.MailItem)
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+
+        Dim selObject As Object = Globals.ThisAddIn.Application.ActiveInspector.CurrentItem
+        If (TypeOf selObject Is Outlook.MailItem) Then
+            CurEmail = TryCast(selObject, Outlook.MailItem)
+        End If
+
 
         'set default folder
         If My.Settings.MailFolderId Is "" Then
@@ -51,15 +54,11 @@ Public Class CndaOutlookModel
         My.Settings.XmlFileName = xmlFilename
         My.Settings.Save()
         CustInfoList.Clear()
-        CustInfoList = CndaXmlToCustInfo(XmlFileName:=xmlFilename)
+        For Each cust As CndaCustInfo In CndaXmlToCustInfo(XmlFileName:=xmlFilename)
+            CustInfoList.Add(cust)
+        Next
     End Sub
 
 
-    Public Function CreateCustList(listObject As System.Windows.Forms.CheckedListBox.CheckedItemCollection) As List(Of CndaCustInfo)
-        CreateCustList = New List(Of CndaCustInfo)
-        For Each obj As CndaCustInfo In listObject
-            CreateCustList.Add(obj)
-        Next
-    End Function
 
 End Class

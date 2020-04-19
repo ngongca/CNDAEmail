@@ -78,6 +78,7 @@ Partial Class CndaOtlPptEmailView
         '
         'OtlPptCheckedListBox
         '
+        Me.OtlPptCheckedListBox.CheckOnClick = True
         Me.OtlPptCheckedListBox.FormattingEnabled = True
         Me.OtlPptCheckedListBox.Location = New System.Drawing.Point(16, 162)
         Me.OtlPptCheckedListBox.Name = "OtlPptCheckedListBox"

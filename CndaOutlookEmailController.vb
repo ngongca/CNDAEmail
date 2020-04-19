@@ -1,8 +1,6 @@
 ﻿Imports Microsoft.Office.Interop.Outlook
 Imports System.Windows.Forms
 Public Class CndaOutlookEmailController
-    Private OtlEmailView As CndaOutlookEmailView
-    Private OtlPptEmailView As CndaOtlPptEmailView
     Private ReadOnly mdl As CndaOutlookModel
     Private WithEvents OtlEmailEvents As ICndaOutlookEvents
 
@@ -11,13 +9,13 @@ Public Class CndaOutlookEmailController
     End Sub
 
     Public Sub RunEmailOnly()
-        OtlEmailView = New CndaOutlookEmailView With {
+        Dim OtlEmailView As New CndaOutlookEmailView With {
             .XmlFilename = mdl.XmlFileName,
             .MailFolderName = mdl.EmailFolder.Name
         }
         With mdl
             .GenPdf = False
-            .PptFileName = ""
+            .AttachPdf = False
         End With
         OtlEmailEvents = OtlEmailView
         If OtlEmailView.ShowDialog = System.Windows.Forms.DialogResult.Yes Then
@@ -27,13 +25,13 @@ Public Class CndaOutlookEmailController
     End Sub
 
     Public Sub RunAttachEmail()
-        OtlPptEmailView = New CndaOtlPptEmailView With {
+        Dim OtlPptEmailView As New CndaOtlPptEmailView With {
             .XmlFilename = mdl.XmlFileName,
             .MailFolderName = mdl.EmailFolder.Name
         }
         With mdl
             .GenPdf = False
-            .PptFileName = ""
+            .AttachPdf = True
         End With
         OtlEmailEvents = OtlPptEmailView
         If OtlPptEmailView.ShowDialog = DialogResult.Yes Then
@@ -43,13 +41,13 @@ Public Class CndaOutlookEmailController
     End Sub
 
     Public Sub RunExportAndEmail()
-        OtlPptEmailView = New CndaOtlPptEmailView With {
+        Dim OtlPptEmailView As New CndaOtlPptEmailView With {
              .XmlFilename = mdl.XmlFileName,
              .MailFolderName = mdl.EmailFolder.Name
          }
         With mdl
             .GenPdf = True
-            .PptFileName = ""
+            .AttachPdf = True
         End With
         OtlEmailEvents = OtlPptEmailView
         If OtlPptEmailView.ShowDialog = DialogResult.Yes Then
@@ -67,11 +65,11 @@ Public Class CndaOutlookEmailController
                 If mdl.PptFileName <> "" Then
                     pdfFilename = CNDAPowerPoint.CndaPdfString(mdl.PptFileName, obj.Cnda, obj.CustName)
                     If mdl.GenPdf Then
-                        'TODO generate the pdf file
+                        CNDAPowerPoint.PptToPDF(mdl.PptFileName, obj)
                     End If
                 End If
                 'Send the mail
-                CreateEmailWithAttachment(pdfFilename, obj, mdl.CurEmail, mdl.EmailFolder)
+                CreateEmail(pdfFilename, obj, mdl.CurEmail, mdl.EmailFolder, mdl.AttachPdf)
                 count += 1
             Next obj
         End If

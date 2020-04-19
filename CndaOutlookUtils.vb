@@ -7,14 +7,19 @@ Module CndaOutlookUtils
     ''' <param name="Info"></param>
     ''' <param name="RefMail"></param>
     ''' <param name="Folder"></param>
-    Public Sub CreateEmailWithAttachment(AttachmentName As String,
-                                         Info As CndaCustInfo,
-                                         RefMail As Outlook.MailItem,
-                                         Folder As Outlook.Folder)
+    Public Sub CreateEmail(AttachmentName As String,
+                           Info As CndaCustInfo,
+                           RefMail As Outlook.MailItem,
+                           Folder As Outlook.Folder,
+                           AttachPDf As Boolean)
         If (RefMail IsNot Nothing) Then
             Dim curMail As Outlook.MailItem = RefMail.Copy
-            If File.Exists(AttachmentName) Then
-                Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
+            If AttachPDf Then
+                If File.Exists(AttachmentName) Then
+                    Dim unused = curMail.Attachments.Add(Source:=AttachmentName)
+                Else
+                    MsgBox($"Error cannot find {AttachmentName} to attach to email. Email will not contain attachment", MsgBoxStyle.Information)
+                End If
             End If
             For Each addr As CndaMailListItem In Info.AddrList
                 Dim recipient As Outlook.Recipient = curMail.Recipients.Add(addr.Address)

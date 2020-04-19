@@ -59,5 +59,32 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Generating Emails....
+        '''</summary>
+        Friend ReadOnly Property GenEmailString() As String
+            Get
+                Return ResourceManager.GetString("GenEmailString", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to NO.
+        '''</summary>
+        Friend ReadOnly Property NOString() As String
+            Get
+                Return ResourceManager.GetString("NOString", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to YES.
+        '''</summary>
+        Friend ReadOnly Property YESString() As String
+            Get
+                Return ResourceManager.GetString("YESString", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

@@ -35,13 +35,13 @@ Public Class CndaOutlookEmailView
         Else
             If Not EmailsGenerated Then
                 WorkingLabel.Visible = True
-                WorkingLabel.Text = "Generating Emails..."
+                WorkingLabel.Text = My.Resources.GenEmailString
                 Dim count As Integer
                 RaiseEvent SendEmailsEvent(EmailViewCheckedListBox.CheckedItems, count)
                 WorkingLabel.Text = $"CNDA generated {count} emails in your {MailFolderName} folder" & vbCrLf _
                 & "Do you wish to delete the current email?"
-                OK_Button1.Text = "YES"
-                Cancel_Button1.Text = "NO"
+                OK_Button1.Text = My.Resources.YESString
+                Cancel_Button1.Text = My.Resources.NOString
                 EmailsGenerated = True
             Else
                 DialogResult = DialogResult.Yes

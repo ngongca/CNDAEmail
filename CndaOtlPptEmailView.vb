@@ -40,13 +40,15 @@ Public Class CndaOtlPptEmailView
         Else
             If Not EmailsGenerated Then
                 OtlPptWorkingLabel.Visible = True
-                OtlPptWorkingLabel.Text = "Generating Emails..."
+                OtlPptWorkingLabel.Text = $"Generating {OtlPptCheckedListBox.CheckedItems.Count} Emails..." & vbCrLf _
+                    & "...Please stand by"
                 Dim count As Integer
                 RaiseEvent SendEmailsEvent(OtlPptCheckedListBox.CheckedItems, count)
                 OtlPptWorkingLabel.Text = $"CNDA generated {count} emails in your {MailFolderName} folder" & vbCrLf _
                 & "Do you wish to delete the current email?"
-                OtlPptOK_Button.Text = "YES"
-                OtlPptCancel_Button.Text = "NO"
+                OtlPptOK_Button.Text = My.Resources.YESString
+                OtlPptCancel_Button.Text = My.Resources.NOString
+
                 EmailsGenerated = True
             Else
                 DialogResult = DialogResult.Yes

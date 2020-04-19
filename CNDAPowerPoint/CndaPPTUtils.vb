@@ -5,6 +5,31 @@ Imports System.Text.RegularExpressions
 ''' Cnda utilities that work on PowerPoint files
 ''' </summary>
 Public Module CndaPPTUtils
+    ''' <summary>
+    ''' Generate single PDF for customer
+    ''' </summary>
+    ''' <param name="PptFilename">File location of Presentation to export to PDF</param>
+    ''' <param name="Cust"><see cref="CndaCustInfo"/> containing edit streams and customer NDA info</param>
+    Public Sub PptToPDF(PptFilename As String, Cust As CndaCustInfo)
+        Dim pptApp As New PowerPoint.Application
+        Dim pptPres As PowerPoint.Presentation = pptApp.Presentations.Open(PptFilename, WithWindow:=MsoTriState.msoFalse,
+                                                                               ReadOnly:=MsoTriState.msoTrue)
+        If pptPres IsNot Nothing Then
+
+            FindReplaceAll(pptPres, Cust)
+            Dim fullName As String = CndaPdfString(pptPres.FullName, Cust.Cnda, Cust.CustName)
+            pptPres.ExportAsFixedFormat(Path:=fullName,
+                                            FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
+                                            Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
+            pptPres.Close()
+        End If
+    End Sub
+    ''' <summary>
+    ''' Generate multiple PDFs for customers in <paramref name="CustList"/>
+    ''' </summary>
+    ''' <param name="PptFilename">File path to Presentation to export to PDF</param>
+    ''' <param name="CustList">List of <see cref="CndaCustInfo"/> containing edit streams and customer NDA info</param>
+    ''' <returns></returns>
     Public Function PptToPDFs(PptFilename As String, CustList As List(Of CndaCustInfo)) As Integer
         Dim retVal As Integer = 0
         Dim pptApp As New PowerPoint.Application
@@ -30,7 +55,12 @@ Public Module CndaPPTUtils
         End If
         Return retVal
     End Function
-
+    ''' <summary>
+    ''' Generate multiple PDFs for customers in <paramref name="CustList"/>
+    ''' </summary>
+    ''' <param name="PptPres">Presentation to export to PDF</param>
+    ''' <param name="CustList">List of <see cref="CndaCustInfo"/> containing edit streams and customer NDA info</param>
+    ''' <returns></returns>
     Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CustList As List(Of CndaCustInfo)) As Integer
         Dim retVal As Integer = 0
         If PptPres IsNot Nothing Then
