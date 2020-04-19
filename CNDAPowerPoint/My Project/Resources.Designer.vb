@@ -59,5 +59,32 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to NO.
+        '''</summary>
+        Friend ReadOnly Property NoString() As String
+            Get
+                Return ResourceManager.GetString("NoString", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to OK.
+        '''</summary>
+        Friend ReadOnly Property OKString() As String
+            Get
+                Return ResourceManager.GetString("OKString", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to YES.
+        '''</summary>
+        Friend ReadOnly Property YesString() As String
+            Get
+                Return ResourceManager.GetString("YesString", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

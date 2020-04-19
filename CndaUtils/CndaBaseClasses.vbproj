@@ -67,7 +67,6 @@
     <Compile Include="CndaEditPair.vb" />
     <Compile Include="CndaCustInfo.vb" />
     <Compile Include="CndaMailListItem.vb" />
-    <Compile Include="CndaModel.vb" />
     <Compile Include="CndaXmlModule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
