@@ -17,17 +17,12 @@ Public Class CndaOutlookModel
         End Set
     End Property
     Public Property PptFileName As String = ""
-    Public Property XmlFileName As String = "<enter xml file>"
+    Public Property XmlFileName As String = ""
     Public Property CurEmail As Outlook.MailItem
     Public Property GenPdf As Boolean = False
     Public Property AttachPdf As Boolean = False
 
     Public Sub New()
-        If My.Settings.XmlFileName <> "" Then
-            CustInfoList = CndaXmlToCustInfo(My.Settings.XmlFileName)
-            XmlFileName = My.Settings.XmlFileName
-        End If
-        'set up this email
         Dim selObject As Object = Globals.ThisAddIn.Application.ActiveInspector.CurrentItem
         If (TypeOf selObject Is Outlook.MailItem) Then
             CurEmail = TryCast(selObject, Outlook.MailItem)

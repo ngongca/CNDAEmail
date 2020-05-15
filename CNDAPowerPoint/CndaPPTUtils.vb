@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Core
 Imports System.Text.RegularExpressions
+Imports System.IO
 
 ''' <summary>
 ''' Cnda utilities that work on PowerPoint files
@@ -48,8 +49,8 @@ Public Module CndaPPTUtils
                 tpres.Close()
                 retVal += 1
             Next
-            If System.IO.File.Exists(tempfile) Then
-                System.IO.File.Delete(tempfile)
+            If File.Exists(tempfile) Then
+                File.Delete(tempfile)
             End If
         End If
         Return retVal
@@ -77,8 +78,8 @@ Public Module CndaPPTUtils
                 tpres.Close()
                 retVal += 1
             Next
-            If System.IO.File.Exists(tempfile) Then
-                System.IO.File.Delete(tempfile)
+            If File.Exists(tempfile) Then
+                File.Delete(tempfile)
             End If
         End If
         Return retVal
@@ -92,9 +93,8 @@ Public Module CndaPPTUtils
     ''' <returns>Fully qualified PDF file name with path</returns>
     Public Function CndaPdfString(PptFilename As String, Cnda As String, CustName As String) As String
         'Write out pdf
-        Dim wPath As String = CreateObject("Scripting.FileSystemObject").GetParentFolderName(PptFilename)
-        Dim wName As String = CreateObject("Scripting.FileSystemObject").GetBaseName(PptFilename)
-        Return wPath & "\" & wName & "_" & CustName & "_CNDA" & Cnda & ".pdf"
+        Dim wBase As String = Path.ChangeExtension(PptFilename, vbNullString)
+        Return wBase & "_" & CustName & "_CNDA" & Cnda & ".pdf"
     End Function
     Private Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
         Dim sld As PowerPoint.Slide
@@ -104,7 +104,10 @@ Public Module CndaPPTUtils
             For Each shp In sld.Shapes
                 If shp.HasTextFrame Then
                     If shp.TextFrame.HasText Then
-                        shp.TextFrame.TextRange.Text = Regex.Replace(shp.TextFrame.TextRange.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
+                        Dim m As Match = Regex.Match(shp.TextFrame.TextRange.Text, FindWord, RegexOptions.IgnoreCase)
+                        If m.Success Then
+                            shp.TextFrame.TextRange.Replace(m.Value, ReplaceWord)
+                        End If
                     End If
                 End If
             Next shp
@@ -123,8 +126,10 @@ Public Module CndaPPTUtils
                 If shp.HasTextFrame Then
                     If shp.TextFrame.HasText Then
                         For Each pair In Info.EditList
-                            shp.TextFrame.TextRange.Text = Regex.Replace(shp.TextFrame.TextRange.Text, pair.FindRegExPattern,
-                                                                         pair.ReplaceValue, RegexOptions.IgnoreCase)
+                            Dim m As Match = Regex.Match(shp.TextFrame.TextRange.Text, pair.FindRegExPattern, RegexOptions.IgnoreCase)
+                            If m.Success Then
+                                shp.TextFrame.TextRange.Replace(m.Value, pair.ReplaceValue)
+                            End If
                         Next pair
                     End If
                 End If

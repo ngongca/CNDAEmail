@@ -36,11 +36,13 @@
     </StartupObject>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\Nick\Documents\Development\CNDAPptDvd\</PublishUrl>
+    <PublishUrl>C:\Users\ngong\Documents\Development\CNDAPptDvd\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.2</ApplicationVersion>
+    <ApplicationVersion>1.0.0.3</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -51,8 +53,6 @@
     <FriendlyName>CndaPowerPoint</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -195,7 +195,6 @@
     <Import Include="System.Linq" />
     <Import Include="System.Text" />
     <Import Include="System.Xml.Linq" />
-    <Import Include="Office = Microsoft.Office.Core" />
     <Import Include="PowerPoint = Microsoft.Office.Interop.PowerPoint" />
   </ItemGroup>
   <!--
@@ -229,6 +228,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Include="app.config" />
+    <None Include="CndaPowerPoint_1_TemporaryKey.pfx" />
     <None Include="CNDAPowerPoint_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="ThisAddIn.Designer.xml">
@@ -304,10 +304,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CNDAPowerPoint_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CndaPowerPoint_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EF7E37429F20BDEDFF602A0B1A1720525CBDCF28</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>75B381C1043B24650E8B7BE904DECBAF76220D12</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <MyType>Windows</MyType>

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PptXmlFilename" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Nick\Documents\Development\samplewitharray.xml</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
