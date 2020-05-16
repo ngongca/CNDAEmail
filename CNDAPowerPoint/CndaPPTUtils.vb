@@ -39,7 +39,7 @@ Public Module CndaPPTUtils
             Dim tempfile As String = System.IO.Path.GetTempFileName()
             pptPres.SaveCopyAs(tempfile)
             For Each c As CndaCustInfo In CustList
-                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoCTrue,
+                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoTrue,
                                                                                  WithWindow:=MsoTriState.msoFalse)
                 FindReplaceAll(tpres, c)
                 Dim fullName As String = CndaPdfString(pptPres.FullName, c.Cnda, c.CustName)
@@ -64,11 +64,11 @@ Public Module CndaPPTUtils
     Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CustList As List(Of CndaCustInfo)) As Integer
         Dim retVal As Integer = 0
         If PptPres IsNot Nothing And CustList IsNot Nothing Then
-            Dim tempfile As String = System.IO.Path.GetTempFileName()
+            Dim tempfile As String = Path.GetTempFileName()
             PptPres.SaveCopyAs(tempfile)
             Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
             For Each c As CndaCustInfo In CustList
-                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoCTrue,
+                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoTrue,
                                                                                  WithWindow:=MsoTriState.msoFalse)
                 FindReplaceAll(tpres, c)
                 Dim fullName As String = CndaPdfString(PptPres.FullName, c.Cnda, c.CustName)
