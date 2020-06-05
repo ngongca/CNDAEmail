@@ -55,35 +55,7 @@ Public Module CndaPPTUtils
         End If
         Return retVal
     End Function
-    ''' <summary>
-    ''' Generate multiple PDFs for customers in <paramref name="CustList"/>
-    ''' </summary>
-    ''' <param name="PptPres">Presentation to export to PDF</param>
-    ''' <param name="CustList">List of <see cref="CndaCustInfo"/> containing edit streams and customer NDA info</param>
-    ''' <returns></returns>
-    Public Function PptToPDFs(ByRef PptPres As PowerPoint.Presentation, CustList As List(Of CndaCustInfo)) As Integer
-        Dim retVal As Integer = 0
-        If PptPres IsNot Nothing And CustList IsNot Nothing Then
-            Dim tempfile As String = Path.GetTempFileName()
-            PptPres.SaveCopyAs(tempfile)
-            Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
-            For Each c As CndaCustInfo In CustList
-                Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoTrue,
-                                                                                 WithWindow:=MsoTriState.msoFalse)
-                FindReplaceAll(tpres, c)
-                Dim fullName As String = CndaPdfString(PptPres.FullName, c.Cnda, c.CustName)
-                tpres.ExportAsFixedFormat(Path:=fullName,
-                                        FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
-                                        Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
-                tpres.Close()
-                retVal += 1
-            Next
-            If File.Exists(tempfile) Then
-                File.Delete(tempfile)
-            End If
-        End If
-        Return retVal
-    End Function
+
     ''' <summary>
     ''' Generate a standard PDF filename from a PowerPoint filename
     ''' </summary>
@@ -96,73 +68,40 @@ Public Module CndaPPTUtils
         Dim wBase As String = Path.ChangeExtension(PptFilename, vbNullString)
         Return wBase & "_" & CustName & "_CNDA" & Cnda & ".pdf"
     End Function
-    Private Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, FindWord As String, ReplaceWord As String)
+
+    ''' <summary>
+    ''' Replace all text in the presentation per the <see cref="CndaCustInfo.EditList"/>.
+    ''' </summary>
+    ''' <param name="pres">Presentation to make changes</param>
+    ''' <param name="Info">Customer list containing edit information in EditList</param>
+    Public Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, Info As CndaCustInfo)
         Dim sld As PowerPoint.Slide
         Dim shp As PowerPoint.Shape
 
-        For Each sld In pres.Slides
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    If shp.TextFrame.HasText Then
-                        Dim m As Match = Regex.Match(shp.TextFrame.TextRange.Text, FindWord, RegexOptions.IgnoreCase)
-                        If m.Success Then
-                            shp.TextFrame.TextRange.Replace(m.Value, ReplaceWord)
+        If pres IsNot Nothing And Info IsNot Nothing Then
+            For Each sld In pres.Slides
+                For Each shp In sld.Shapes
+                    If shp.HasTextFrame Then
+                        If shp.TextFrame.HasText Then
+                            For Each pair In Info.EditList
+                                Dim m As Match = Regex.Match(shp.TextFrame.TextRange.Text, pair.FindRegExPattern, RegexOptions.IgnoreCase)
+                                If m.Success Then
+                                    shp.TextFrame.TextRange.Replace(m.Value, pair.ReplaceValue)
+                                End If
+                            Next pair
                         End If
                     End If
+                Next shp
+                ' Check footer as well
+                If sld.HeadersFooters.Footer.Visible Then
+                    For Each pair In Info.EditList
+                        sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text,
+                                                                       pair.FindRegExPattern,
+                                                                       pair.ReplaceValue, RegexOptions.IgnoreCase)
+                    Next pair
                 End If
-            Next shp
-            ' Check footer as well
-            If sld.HeadersFooters.Footer.Visible Then
-                sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text, FindWord, ReplaceWord, RegexOptions.IgnoreCase)
-            End If
-        Next sld
+            Next sld
+        End If
     End Sub
-    Private Sub FindReplaceAll(ByRef pres As PowerPoint.Presentation, Info As CndaCustInfo)
-        Dim sld As PowerPoint.Slide
-        Dim shp As PowerPoint.Shape
 
-        For Each sld In pres.Slides
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    If shp.TextFrame.HasText Then
-                        For Each pair In Info.EditList
-                            Dim m As Match = Regex.Match(shp.TextFrame.TextRange.Text, pair.FindRegExPattern, RegexOptions.IgnoreCase)
-                            If m.Success Then
-                                shp.TextFrame.TextRange.Replace(m.Value, pair.ReplaceValue)
-                            End If
-                        Next pair
-                    End If
-                End If
-            Next shp
-            ' Check footer as well
-            If sld.HeadersFooters.Footer.Visible Then
-                For Each pair In Info.EditList
-                    sld.HeadersFooters.Footer.Text = Regex.Replace(sld.HeadersFooters.Footer.Text,
-                                                                   pair.FindRegExPattern,
-                                                                   pair.ReplaceValue, RegexOptions.IgnoreCase)
-                Next pair
-            End If
-        Next sld
-    End Sub
-    'Find the FIRST occurance of myPattern in the powerpoint and return the value
-    Private Function FindRegExp(ByVal pres As PowerPoint.Presentation, myPattern As String)
-        FindRegExp = myPattern
-        Dim sld As PowerPoint.Slide
-        'Loop through each slide in Presentation
-        For Each sld In pres.Slides
-            Dim shp As PowerPoint.Shape
-            For Each shp In sld.Shapes
-                If shp.HasTextFrame Then
-                    If shp.TextFrame.HasText Then
-                        'Test whether the String can be compared.
-                        Dim colMatches As Match = Regex.Match(shp.TextFrame.TextRange.Text, myPattern, RegexOptions.IgnoreCase)
-                        If colMatches.Success Then
-                            FindRegExp = colMatches.Value
-                            Exit For
-                        End If
-                    End If
-                End If
-            Next shp
-        Next sld
-    End Function
 End Module

@@ -3,11 +3,6 @@ Imports Microsoft.Office.Tools.Ribbon
 Imports System.IO
 Public Class CndaOutlookRibbon
 
-    Private Sub CndaEmailExportAndEmail_Button_Click() Handles CNDAExportAndEmail_Button.Click
-        Dim cntrl = New CndaOutlookEmailController()
-        cntrl.RunExportAndEmail()
-    End Sub
-
     ''' <summary>
     ''' Gets PPT and XLS file from user and then generates CNDA emails using existing PDF files that were generated using the NDA tools.
     ''' </summary>

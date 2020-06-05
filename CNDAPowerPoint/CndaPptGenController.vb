@@ -1,4 +1,7 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.IO
+Imports System.Windows.Forms
+Imports Microsoft.Office.Core
+
 Public Class CndaPptGenController
 
     Private WithEvents PptView As CndaPptGenView
@@ -14,11 +17,25 @@ Public Class CndaPptGenController
 
     Private Sub GenPdfEventHandler(ByRef objList As CheckedListBox.CheckedItemCollection,
                                   ByRef Count As Integer) Handles PptView.GenPdfEvent
-        Dim custList As New List(Of CndaCustInfo)
-        For Each o As CndaCustInfo In objList
-            custList.Add(o)
-        Next
-        Count = PptToPDFs(PptPres:=Globals.ThisAddIn.Application.ActivePresentation, CustList:=custList)
+        Count = 0
+        Dim tempfile As String = Path.GetTempFileName()
+        Dim pptApp As PowerPoint.Application = Globals.ThisAddIn.Application
+        Dim PptPres As PowerPoint.Presentation = pptApp.ActivePresentation
+        PptPres.SaveCopyAs(tempfile)
+        For Each c As CndaCustInfo In objList
+            Dim tpres As PowerPoint.Presentation = pptApp.Presentations.Open(tempfile, [ReadOnly]:=MsoTriState.msoTrue,
+                                                                             WithWindow:=MsoTriState.msoFalse)
+            FindReplaceAll(tpres, c)
+            Dim fullName As String = CndaPdfString(PptPres.FullName, c.Cnda, c.CustName)
+            tpres.ExportAsFixedFormat(Path:=fullName,
+                                    FixedFormatType:=PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF,
+                                    Intent:=PowerPoint.PpFixedFormatIntent.ppFixedFormatIntentScreen)
+            tpres.Close()
+            Count += 1
+        Next c
+        If File.Exists(tempfile) Then
+            File.Delete(tempfile)
+        End If
     End Sub
 
     Private Sub PptViewEvents_XmlFileChangeEvent(xmlFilename As String,
