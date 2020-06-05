@@ -14,7 +14,6 @@ Public Class CndaOutlookEmailController
             .MailFolderName = mdl.EmailFolder.Name
         }
         With mdl
-            .GenPdf = False
             .AttachPdf = False
         End With
         OtlEmailEvents = OtlEmailView
@@ -30,7 +29,6 @@ Public Class CndaOutlookEmailController
             .MailFolderName = mdl.EmailFolder.Name
         }
         With mdl
-            .GenPdf = False
             .AttachPdf = True
         End With
         OtlEmailEvents = OtlPptEmailView
@@ -40,21 +38,6 @@ Public Class CndaOutlookEmailController
         OtlPptEmailView.Dispose()
     End Sub
 
-    Public Sub RunExportAndEmail()
-        Dim OtlPptEmailView As New CndaOtlPptEmailView With {
-             .XmlFilename = mdl.XmlFileName,
-             .MailFolderName = mdl.EmailFolder.Name
-         }
-        With mdl
-            .GenPdf = True
-            .AttachPdf = True
-        End With
-        OtlEmailEvents = OtlPptEmailView
-        If OtlPptEmailView.ShowDialog = DialogResult.Yes Then
-            mdl.CurEmail.Close(OlInspectorClose.olDiscard)
-        End If
-        OtlPptEmailView.Dispose()
-    End Sub
 
     Private Sub SendEmailsEventHandler(ByRef objList As CheckedListBox.CheckedItemCollection,
                                        ByRef count As Integer) Handles OtlEmailEvents.SendEmailsEvent
@@ -64,9 +47,6 @@ Public Class CndaOutlookEmailController
                 Dim pdfFilename As String = ""
                 If mdl.PptFileName <> "" Then
                     pdfFilename = CNDAPowerPoint.CndaPdfString(mdl.PptFileName, obj.Cnda, obj.CustName)
-                    If mdl.GenPdf Then
-                        CNDAPowerPoint.PptToPDF(mdl.PptFileName, obj)
-                    End If
                 End If
                 'Send the mail
                 CreateEmail(pdfFilename, obj, mdl.CurEmail, mdl.EmailFolder, mdl.AttachPdf)

@@ -19,7 +19,6 @@ Public Class CndaOutlookModel
     Public Property PptFileName As String = ""
     Public Property XmlFileName As String = ""
     Public Property CurEmail As Outlook.MailItem
-    Public Property GenPdf As Boolean = False
     Public Property AttachPdf As Boolean = False
 
     Public Sub New()
