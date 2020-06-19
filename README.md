@@ -56,3 +56,6 @@ Where
   * **MailTo** this address will show up on the To: line
   * **MailCC** this address will show up on the CC: line
   * **MailBCC** this address will show up on the BCC: line
+
+### _CNDAExcel_
+_Deprecated - Initially used Excel to contain the data, but moved to XML._
