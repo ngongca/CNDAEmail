@@ -36,7 +36,7 @@ Module CndaOutlookUtils
             If Folder Is Nothing Then
                 MsgBox($"Error cannot find {Folder.MailFolderId} folder in Outlook", MsgBoxStyle.Critical)
             Else
-                curMail.Move(Folder)
+                curMail.Save()
             End If
         End If
     End Sub

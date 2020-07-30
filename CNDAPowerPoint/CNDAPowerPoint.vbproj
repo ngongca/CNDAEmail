@@ -229,6 +229,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="CndaPowerPoint_1_TemporaryKey.pfx" />
+    <None Include="CndaPowerPoint_2_TemporaryKey.pfx" />
     <None Include="CNDAPowerPoint_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="ThisAddIn.Designer.xml">
@@ -304,10 +305,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CndaPowerPoint_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CndaPowerPoint_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>75B381C1043B24650E8B7BE904DECBAF76220D12</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F6B3DCAC055B8E49A802441AD7DC21F05229086C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <MyType>Windows</MyType>
