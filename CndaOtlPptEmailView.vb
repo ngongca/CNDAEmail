@@ -6,12 +6,10 @@ Public Class CndaOtlPptEmailView
 
     Private PptFilename As String = ""
     Public Property XmlFilename As String = ""
-    Public Property MailFolderName As String = "<select mailfolder>"
     Private EmailsGenerated As Boolean = False
 
     Public Event XmlFileChangeEvent(xmlFilename As String,
                                     ByRef objList As CheckedListBox.ObjectCollection) Implements ICndaOutlookEvents.XmlFileChangeEvent
-    Public Event EmailFolderChangeEvent(ByRef emailFolder As Folder) Implements ICndaOutlookEvents.EmailFolderChangeEvent
     Public Event SendEmailsEvent(ByRef objList As CheckedListBox.CheckedItemCollection,
                                  ByRef count As Integer) Implements ICndaOutlookEvents.SendEmailsEvent
     Public Event PptFileChangeEvent(pptFilename As String) Implements ICndaOutlookEvents.PptFileChangeEvent
@@ -21,7 +19,6 @@ Public Class CndaOtlPptEmailView
         For i = 0 To OtlPptCheckedListBox.Items.Count - 1
             OtlPptCheckedListBox.SetItemChecked(i, CheckState.Checked)
         Next
-        OtlPptFolderLabel.Text = MailFolderName
         Update()
     End Sub
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OtlPptOK_Button.Click
@@ -44,7 +41,7 @@ Public Class CndaOtlPptEmailView
                     & "...Please stand by"
                 Dim count As Integer
                 RaiseEvent SendEmailsEvent(OtlPptCheckedListBox.CheckedItems, count)
-                OtlPptWorkingLabel.Text = $"CNDA generated {count} emails in your {MailFolderName} folder" & vbCrLf _
+                OtlPptWorkingLabel.Text = $"CNDA generated {count} emails" & vbCrLf _
                 & "Do you wish to delete the current email?"
                 OtlPptOK_Button.Text = My.Resources.YESString
                 OtlPptCancel_Button.Text = My.Resources.NOString
@@ -60,14 +57,6 @@ Public Class CndaOtlPptEmailView
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OtlPptCancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
-    End Sub
-
-    Private Sub OtlPptFolderButton_Click(sender As Object, e As EventArgs) Handles OtlPptFolderButton.Click
-        Dim folder As Folder = Globals.ThisAddIn.Application.Session.PickFolder()
-        If folder IsNot Nothing Then
-            RaiseEvent EmailFolderChangeEvent(folder)
-            OtlPptFolderLabel.Text = folder.Name
-        End If
     End Sub
 
     Private Sub OtlPptXmlButton_Click(sender As Object, e As EventArgs) Handles OtlPptXmlButton.Click

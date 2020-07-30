@@ -2,20 +2,6 @@
 Public Class CndaOutlookModel
     Public ReadOnly Property CustInfoList As New List(Of CndaCustInfo)
 
-
-    Private _EmailFolder As Outlook.Folder
-    Public Property EmailFolder() As Outlook.Folder
-        Get
-            Return _EmailFolder
-        End Get
-        Set(AutoPropertyValue As Outlook.Folder)
-            If AutoPropertyValue IsNot Nothing Then
-                _EmailFolder = AutoPropertyValue
-                My.Settings.MailFolderId = _EmailFolder.EntryID
-                My.Settings.Save()
-            End If
-        End Set
-    End Property
     Public Property PptFileName As String = ""
     Public Property XmlFileName As String = ""
     Public Property CurEmail As Outlook.MailItem
@@ -25,14 +11,6 @@ Public Class CndaOutlookModel
         Dim selObject As Object = Globals.ThisAddIn.Application.ActiveInspector.CurrentItem
         If (TypeOf selObject Is Outlook.MailItem) Then
             CurEmail = TryCast(selObject, Outlook.MailItem)
-        End If
-        'set default folder
-        If My.Settings.MailFolderId Is "" Then
-            EmailFolder = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderDrafts)
-            My.Settings.MailFolderId = EmailFolder.EntryID
-            My.Settings.Save()
-        Else
-            EmailFolder = Globals.ThisAddIn.Application.Session.GetFolderFromID(My.Settings.MailFolderId)
         End If
     End Sub
 

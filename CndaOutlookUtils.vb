@@ -1,16 +1,14 @@
 ﻿Imports System.IO
 Module CndaOutlookUtils
     ''' <summary>
-    ''' Create a copy of a reference email based on the Cnda Info, attaches a file it it exists and moves to outlook <paramref name="Folder"/>
+    ''' Create a copy of a reference email based on the Cnda Info, attaches a file it it exists./>
     ''' </summary>
     ''' <param name="AttachmentName">Name of file to attach.  If Nothing, then no attachment will be made</param>
     ''' <param name="Info"></param>
     ''' <param name="RefMail"></param>
-    ''' <param name="Folder"></param>
     Public Sub CreateEmail(AttachmentName As String,
                            Info As CndaCustInfo,
                            RefMail As Outlook.MailItem,
-                           Folder As Outlook.Folder,
                            AttachPDf As Boolean)
         If (RefMail IsNot Nothing) Then
             Dim curMail As Outlook.MailItem = RefMail.Copy
@@ -32,12 +30,7 @@ Module CndaOutlookUtils
                         recipient.Type = Outlook.OlMailRecipientType.olBCC
                 End Select
             Next addr
-
-            If Folder Is Nothing Then
-                MsgBox($"Error cannot find {Folder.MailFolderId} folder in Outlook", MsgBoxStyle.Critical)
-            Else
-                curMail.Save()
-            End If
+            curMail.Save()
         End If
     End Sub
 End Module

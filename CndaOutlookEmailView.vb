@@ -4,12 +4,10 @@ Imports Microsoft.Office.Interop.Outlook
 Public Class CndaOutlookEmailView
     Implements CNDAEmail.ICndaOutlookEvents
     Public Property XmlFilename As String = "<enter xml file>"
-    Public Property MailFolderName As String = "<enter mail folder>"
     Private EmailsGenerated As Boolean = False
 
     Public Event XmlFileChangeEvent(ByVal xmlFilename As String,
                                     ByRef objList As CheckedListBox.ObjectCollection) Implements ICndaOutlookEvents.XmlFileChangeEvent
-    Public Event EmailFolderChangeEvent(ByRef emailFolder As Outlook.Folder) Implements ICndaOutlookEvents.EmailFolderChangeEvent
     Public Event SendEmailsEvent(ByRef objList As CheckedListBox.CheckedItemCollection,
                                  ByRef count As Integer) Implements ICndaOutlookEvents.SendEmailsEvent
     Public Event PptFileChangeEvent(pptFilename As String) Implements ICndaOutlookEvents.PptFileChangeEvent
@@ -20,7 +18,6 @@ Public Class CndaOutlookEmailView
         For i = 0 To EmailViewCheckedListBox.Items.Count - 1
             EmailViewCheckedListBox.SetItemChecked(i, CheckState.Checked)
         Next
-        EmailFolderLabel1.Text = MailFolderName
         Update()
     End Sub
 
@@ -38,7 +35,7 @@ Public Class CndaOutlookEmailView
                 WorkingLabel.Text = My.Resources.GenEmailString
                 Dim count As Integer
                 RaiseEvent SendEmailsEvent(EmailViewCheckedListBox.CheckedItems, count)
-                WorkingLabel.Text = $"CNDA generated {count} emails in your {MailFolderName} folder" & vbCrLf _
+                WorkingLabel.Text = $"CNDA generated {count} emails" & vbCrLf _
                 & "Do you wish to delete the current email?"
                 OK_Button1.Text = My.Resources.YESString
                 Cancel_Button1.Text = My.Resources.NOString
@@ -66,15 +63,6 @@ Public Class CndaOutlookEmailView
                 EmailViewCheckedListBox.SetItemChecked(i, CheckState.Checked)
             Next
             Update()
-        End If
-    End Sub
-
-    Private Sub GetEmailFolderButton_Click(sender As Object, e As EventArgs) Handles GetEmailFolderButton.Click
-        Dim folder As Folder = Globals.ThisAddIn.Application.Session.PickFolder()
-        If folder IsNot Nothing Then
-            RaiseEvent EmailFolderChangeEvent(folder)
-            MailFolderName = folder.Name
-            EmailFolderLabel1.Text = folder.Name
         End If
     End Sub
 

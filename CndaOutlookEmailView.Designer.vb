@@ -27,10 +27,7 @@ Partial Class CndaOutlookEmailView
         Me.Cancel_Button1 = New System.Windows.Forms.Button()
         Me.XmlLabel1 = New System.Windows.Forms.Label()
         Me.GetXlsButton = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.GetEmailFolderButton = New System.Windows.Forms.Button()
         Me.XlsFilenameLabel = New System.Windows.Forms.Label()
-        Me.EmailFolderLabel1 = New System.Windows.Forms.Label()
         Me.XmlOpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.EmailViewCheckedListBox = New System.Windows.Forms.CheckedListBox()
         Me.WorkingLabel = New System.Windows.Forms.Label()
@@ -45,11 +42,11 @@ Partial Class CndaOutlookEmailView
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.OK_Button1, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Cancel_Button1, 1, 0)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(395, 181)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(354, 117)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(146, 29)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(146, 30)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'OK_Button1
@@ -74,7 +71,7 @@ Partial Class CndaOutlookEmailView
         'XmlLabel1
         '
         Me.XmlLabel1.AutoSize = True
-        Me.XmlLabel1.Location = New System.Drawing.Point(13, 62)
+        Me.XmlLabel1.Location = New System.Drawing.Point(13, 6)
         Me.XmlLabel1.Name = "XmlLabel1"
         Me.XmlLabel1.Size = New System.Drawing.Size(112, 13)
         Me.XmlLabel1.TabIndex = 1
@@ -82,48 +79,21 @@ Partial Class CndaOutlookEmailView
         '
         'GetXlsButton
         '
-        Me.GetXlsButton.Location = New System.Drawing.Point(13, 79)
+        Me.GetXlsButton.Location = New System.Drawing.Point(13, 23)
         Me.GetXlsButton.Name = "GetXlsButton"
         Me.GetXlsButton.Size = New System.Drawing.Size(92, 23)
         Me.GetXlsButton.TabIndex = 2
         Me.GetXlsButton.Text = "Select XML File"
         Me.GetXlsButton.UseVisualStyleBackColor = True
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(16, 13)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(161, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Folder to place generated Emails"
-        '
-        'GetEmailFolderButton
-        '
-        Me.GetEmailFolderButton.Location = New System.Drawing.Point(13, 30)
-        Me.GetEmailFolderButton.Name = "GetEmailFolderButton"
-        Me.GetEmailFolderButton.Size = New System.Drawing.Size(92, 23)
-        Me.GetEmailFolderButton.TabIndex = 4
-        Me.GetEmailFolderButton.Text = "Email Folder"
-        Me.GetEmailFolderButton.UseVisualStyleBackColor = True
-        '
         'XlsFilenameLabel
         '
         Me.XlsFilenameLabel.AutoSize = True
-        Me.XlsFilenameLabel.Location = New System.Drawing.Point(111, 84)
+        Me.XlsFilenameLabel.Location = New System.Drawing.Point(111, 28)
         Me.XlsFilenameLabel.Name = "XlsFilenameLabel"
         Me.XlsFilenameLabel.Size = New System.Drawing.Size(76, 13)
         Me.XlsFilenameLabel.TabIndex = 5
         Me.XlsFilenameLabel.Text = "<xml filename>"
-        '
-        'EmailFolderLabel1
-        '
-        Me.EmailFolderLabel1.AutoSize = True
-        Me.EmailFolderLabel1.Location = New System.Drawing.Point(111, 35)
-        Me.EmailFolderLabel1.Name = "EmailFolderLabel1"
-        Me.EmailFolderLabel1.Size = New System.Drawing.Size(72, 13)
-        Me.EmailFolderLabel1.TabIndex = 6
-        Me.EmailFolderLabel1.Text = "<email folder>"
         '
         'XmlOpenFileDialog2
         '
@@ -134,7 +104,7 @@ Partial Class CndaOutlookEmailView
         '
         Me.EmailViewCheckedListBox.CheckOnClick = True
         Me.EmailViewCheckedListBox.FormattingEnabled = True
-        Me.EmailViewCheckedListBox.Location = New System.Drawing.Point(13, 109)
+        Me.EmailViewCheckedListBox.Location = New System.Drawing.Point(13, 53)
         Me.EmailViewCheckedListBox.Name = "EmailViewCheckedListBox"
         Me.EmailViewCheckedListBox.Size = New System.Drawing.Size(236, 94)
         Me.EmailViewCheckedListBox.Sorted = True
@@ -144,9 +114,9 @@ Partial Class CndaOutlookEmailView
         '
         Me.WorkingLabel.Enabled = False
         Me.WorkingLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WorkingLabel.Location = New System.Drawing.Point(255, 109)
+        Me.WorkingLabel.Location = New System.Drawing.Point(255, 53)
         Me.WorkingLabel.Name = "WorkingLabel"
-        Me.WorkingLabel.Size = New System.Drawing.Size(286, 61)
+        Me.WorkingLabel.Size = New System.Drawing.Size(245, 61)
         Me.WorkingLabel.TabIndex = 8
         Me.WorkingLabel.Text = "WorkingLabel"
         Me.WorkingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -158,13 +128,10 @@ Partial Class CndaOutlookEmailView
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button1
-        Me.ClientSize = New System.Drawing.Size(553, 222)
+        Me.ClientSize = New System.Drawing.Size(512, 153)
         Me.Controls.Add(Me.WorkingLabel)
         Me.Controls.Add(Me.EmailViewCheckedListBox)
-        Me.Controls.Add(Me.EmailFolderLabel1)
         Me.Controls.Add(Me.XlsFilenameLabel)
-        Me.Controls.Add(Me.GetEmailFolderButton)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.GetXlsButton)
         Me.Controls.Add(Me.XmlLabel1)
         Me.Controls.Add(Me.TableLayoutPanel2)
@@ -185,10 +152,7 @@ Partial Class CndaOutlookEmailView
     Friend WithEvents Cancel_Button1 As System.Windows.Forms.Button
     Friend WithEvents XmlLabel1 As System.Windows.Forms.Label
     Friend WithEvents GetXlsButton As System.Windows.Forms.Button
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents GetEmailFolderButton As System.Windows.Forms.Button
     Friend WithEvents XlsFilenameLabel As System.Windows.Forms.Label
-    Friend WithEvents EmailFolderLabel1 As System.Windows.Forms.Label
     Friend WithEvents XmlOpenFileDialog2 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents EmailViewCheckedListBox As System.Windows.Forms.CheckedListBox
     Friend WithEvents WorkingLabel As System.Windows.Forms.Label

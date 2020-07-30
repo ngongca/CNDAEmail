@@ -10,8 +10,7 @@ Public Class CndaOutlookEmailController
 
     Public Sub RunEmailOnly()
         Dim OtlEmailView As New CndaOutlookEmailView With {
-            .XmlFilename = mdl.XmlFileName,
-            .MailFolderName = mdl.EmailFolder.Name
+            .XmlFilename = mdl.XmlFileName
         }
         With mdl
             .AttachPdf = False
@@ -25,8 +24,7 @@ Public Class CndaOutlookEmailController
 
     Public Sub RunAttachEmail()
         Dim OtlPptEmailView As New CndaOtlPptEmailView With {
-            .XmlFilename = mdl.XmlFileName,
-            .MailFolderName = mdl.EmailFolder.Name
+            .XmlFilename = mdl.XmlFileName
         }
         With mdl
             .AttachPdf = True
@@ -49,15 +47,9 @@ Public Class CndaOutlookEmailController
                     pdfFilename = CNDAPowerPoint.CndaPdfString(mdl.PptFileName, obj.Cnda, obj.CustName)
                 End If
                 'Send the mail
-                CreateEmail(pdfFilename, obj, mdl.CurEmail, mdl.EmailFolder, mdl.AttachPdf)
+                CreateEmail(pdfFilename, obj, mdl.CurEmail, mdl.AttachPdf)
                 count += 1
             Next obj
-        End If
-    End Sub
-
-    Private Sub EmailFolderChangeEventHandler(ByRef folder As Outlook.Folder) Handles OtlEmailEvents.EmailFolderChangeEvent
-        If folder IsNot Nothing Then
-            mdl.EmailFolder = folder
         End If
     End Sub
     Private Sub XmlFileChangeEventHander(ByVal xmlFilename As String,
@@ -70,7 +62,6 @@ Public Class CndaOutlookEmailController
             Next
         End If
     End Sub
-
     Private Sub PptFileChangeEventHandler(ByVal pptFilename As String) Handles OtlEmailEvents.PptFileChangeEvent
         If pptFilename <> "" Then
             mdl.PptFileName = pptFilename
